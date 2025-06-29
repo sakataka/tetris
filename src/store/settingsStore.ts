@@ -41,7 +41,7 @@ const validateSettings = (settings: any): SettingsState => {
 export const useSettingsStore = create<SettingsStore>()(
   devtools(
     persist(
-      (set, get) => ({
+      (set, _get) => ({
         // Initial state
         language: "en",
         showGhostPiece: true,

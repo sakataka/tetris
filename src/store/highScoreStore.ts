@@ -47,7 +47,7 @@ const validateHighScoreData = (data: any): HighScoreEntry[] => {
 export const useHighScoreStore = create<HighScoreStore>()(
   devtools(
     persist(
-      (set, get) => ({
+      (set, _get) => ({
         // Initial state
         highScores: [],
 

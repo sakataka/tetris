@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, test } from "bun:test";
+import { describe, expect, test } from "bun:test";
 
 describe("Store Integration", () => {
   test("all stores can be imported without errors", () => {

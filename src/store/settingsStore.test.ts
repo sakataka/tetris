@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, test } from "bun:test";
+import { describe, expect, test } from "bun:test";
 
 describe("SettingsStore", () => {
   test("should be able to import settings store", () => {

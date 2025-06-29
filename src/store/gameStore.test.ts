@@ -1,5 +1,4 @@
 import { beforeEach, describe, expect, test } from "bun:test";
-import type { GameState } from "@/types/game";
 import { GAME_CONSTANTS } from "@/utils/gameConstants";
 import { useGameStore } from "./gameStore";
 
@@ -105,7 +104,7 @@ describe("GameStore", () => {
   describe("State Immutability", () => {
     test("all actions should maintain state immutability", () => {
       const store = useGameStore.getState();
-      const originalBoard = store.board;
+      const _originalBoard = store.board;
 
       // Call various actions
       store.moveLeft();

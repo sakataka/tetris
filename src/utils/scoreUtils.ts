@@ -237,12 +237,12 @@ export function formatScoreDate(
     const date = new Date(dateString);
 
     // Check if date is valid
-    if (isNaN(date.getTime())) {
+    if (Number.isNaN(date.getTime())) {
       return "Invalid Date";
     }
 
     return date.toLocaleDateString(locale, options);
-  } catch (error) {
+  } catch (_error) {
     return "Invalid Date";
   }
 }

@@ -789,24 +789,24 @@ This document provides a comprehensive, step-by-step implementation guide for de
 **Objective**: Ensure all UI components work correctly
 
 **Checklist:**
-- [ ] Run all tests: `bun test`
-- [ ] Test all UI utility functions
-- [ ] Verify board renders correctly on all screen sizes
-- [ ] Test piece previews display accurate shapes and colors
-- [ ] Verify scores animate smoothly
-- [ ] Confirm all text uses i18n translations
-- [ ] Test component responsiveness manually
-- [ ] Run type checking and linting
-- [ ] Commit with message: "feat(ui): implement core game UI components with animations and responsive design"
-- [ ] Push to GitHub: `git push origin main`
-- [ ] Verify CI pipeline passes
+- [x] Run all tests: `bun test`
+- [x] Test all UI utility functions
+- [x] Verify board renders correctly on all screen sizes
+- [x] Test piece previews display accurate shapes and colors
+- [x] Verify scores animate smoothly
+- [x] Confirm all text uses i18n translations
+- [x] Test component responsiveness manually
+- [x] Run type checking and linting
+- [x] Commit with message: "feat(ui): implement core game UI components with animations and responsive design"
+- [x] Push to GitHub: `git push origin main`
+- [x] Verify CI pipeline passes
 
 **Phase 5 Validation Criteria:**
-- [ ] Board renders correctly on all screen sizes
-- [ ] Piece previews display accurate shapes and colors
-- [ ] Scores animate smoothly with proper formatting
-- [ ] All text uses i18n translations consistently
-- [ ] Components are accessible and semantic
+- [x] Board renders correctly on all screen sizes
+- [x] Piece previews display accurate shapes and colors
+- [x] Scores animate smoothly with proper formatting
+- [x] All text uses i18n translations consistently
+- [x] Components are accessible and semantic
 
 ---
 
@@ -818,158 +818,158 @@ This document provides a comprehensive, step-by-step implementation guide for de
 **Objective**: Test timing and interval calculation functions
 
 **Checklist:**
-- [ ] Create tests for fall speed calculation based on level
-- [ ] Write test for timing interval validation
-- [ ] Write test for action cooldown calculation
-- [ ] Write test for frame rate limiting utilities
-- [ ] Test timing consistency across different speeds
+- [x] Create tests for fall speed calculation based on level
+- [x] Write test for timing interval validation
+- [x] Write test for action cooldown calculation
+- [x] Write test for frame rate limiting utilities
+- [x] Test timing consistency across different speeds
 
 ### Task 6.2: Game Loop Implementation
 **Objective**: Create main game loop with optimal browser-synced timing
 
 **Checklist:**
-- [ ] Create `src/hooks/core/useGameLoop.ts` file
-- [ ] Implement game loop with `requestAnimationFrame` for smooth 60fps
-- [ ] Add timestamp-based delta timing for consistent gameplay speed
-- [ ] Connect to game store for state updates
-- [ ] Add automatic piece falling based on level speed using accumulated time
-- [ ] Implement lock delay system with movement/rotation reset counting
-- [ ] Add DAS (Delayed Auto Shift) for smooth key repeat behavior
-- [ ] Implement pause/resume functionality
-- [ ] Add game over condition handling
-- [ ] Ensure consistent timing independent of frame rate
-- [ ] Add proper cleanup on component unmount with `cancelAnimationFrame`
-- [ ] Test performance on lower-end devices
+- [x] Create `src/hooks/core/useGameLoop.ts` file
+- [x] Implement game loop with `requestAnimationFrame` for smooth 60fps
+- [x] Add timestamp-based delta timing for consistent gameplay speed
+- [x] Connect to game store for state updates
+- [x] Add automatic piece falling based on level speed using accumulated time
+- [x] Implement lock delay system with movement/rotation reset counting
+- [x] Add DAS (Delayed Auto Shift) for smooth key repeat behavior
+- [x] Implement pause/resume functionality
+- [x] Add game over condition handling
+- [x] Ensure consistent timing independent of frame rate
+- [x] Add proper cleanup on component unmount with `cancelAnimationFrame`
+- [x] Test performance on lower-end devices
 
 ### Task 6.3: Action Cooldown Utilities - Testing (TDD)
 **Objective**: Test input rate limiting and debouncing
 
 **Checklist:**
-- [ ] Create tests for action cooldown timing
-- [ ] Write test for input debouncing logic
-- [ ] Write test for rapid input filtering
-- [ ] Write test for cooldown reset functionality
-- [ ] Test different cooldown periods for different actions
+- [x] Create tests for action cooldown timing
+- [x] Write test for input debouncing logic
+- [x] Write test for rapid input filtering
+- [x] Write test for cooldown reset functionality
+- [x] Test different cooldown periods for different actions
 
 ### Task 6.4: Action Cooldown Implementation
 **Objective**: Implement input rate limiting system
 
 **Checklist:**
-- [ ] Create `src/hooks/controls/useActionCooldown.ts` file
-- [ ] Implement cooldown timers for different actions
-- [ ] Add debouncing for rapid inputs
-- [ ] Configure different cooldown periods (movement vs rotation)
-- [ ] Add cooldown state management
-- [ ] Integrate with game actions
+- [x] Create `src/hooks/controls/useActionCooldown.ts` file
+- [x] Implement cooldown timers for different actions
+- [x] Add debouncing for rapid inputs
+- [x] Configure different cooldown periods (movement vs rotation)
+- [x] Add cooldown state management
+- [x] Integrate with game actions
 
 ### Task 6.5: Keyboard Controls Implementation
 **Objective**: Create keyboard input handling system
 
 **Checklist:**
-- [ ] Create `src/hooks/controls/useKeyboardControls.ts` file
-- [ ] Implement keyboard event listeners
-- [ ] Map keyboard inputs to game actions:
-  - [ ] Arrow Left/Right: Move piece left/right
-  - [ ] Arrow Down: Soft drop
-  - [ ] Space: Hard drop
-  - [ ] Arrow Up/X: Rotate clockwise
-  - [ ] Z: Rotate counter-clockwise
-  - [ ] C: Hold piece
-  - [ ] P/Esc: Pause/Resume
-  - [ ] R: Reset game (when game over)
-  - [ ] Enter: Start game / Confirm actions
-- [ ] Implement DAS (Delayed Auto Shift) for left/right movement
-- [ ] Add proper event cleanup
-- [ ] Integrate with action cooldown system
+- [x] Create `src/hooks/controls/useKeyboardControls.ts` file
+- [x] Implement keyboard event listeners
+- [x] Map keyboard inputs to game actions:
+  - [x] Arrow Left/Right: Move piece left/right
+  - [x] Arrow Down: Soft drop
+  - [x] Space: Hard drop
+  - [x] Arrow Up/X: Rotate clockwise
+  - [x] Z: Rotate counter-clockwise
+  - [x] C: Hold piece
+  - [x] P/Esc: Pause/Resume
+  - [x] R: Reset game (when game over)
+  - [x] Enter: Start game / Confirm actions
+- [x] Implement DAS (Delayed Auto Shift) for left/right movement
+- [x] Add proper event cleanup
+- [x] Integrate with action cooldown system
 
 ### Task 6.6: Touch Gesture Implementation
 **Objective**: Create touch input system for mobile
 
 **Checklist:**
-- [ ] Create `src/hooks/controls/useTouchGestures.ts` file
-- [ ] Implement touch event detection
-- [ ] Add swipe gesture recognition:
-  - [ ] Swipe left: Move piece left
-  - [ ] Swipe right: Move piece right
-  - [ ] Swipe down: Soft drop
-  - [ ] Long swipe down: Hard drop
-- [ ] Add tap gesture recognition:
-  - [ ] Single tap: Rotate piece
-  - [ ] Double tap: Hold piece
-- [ ] Configure gesture thresholds (distance, time)
-- [ ] Add proper touch event cleanup
+- [x] Create `src/hooks/controls/useTouchGestures.ts` file
+- [x] Implement touch event detection
+- [x] Add swipe gesture recognition:
+  - [x] Swipe left: Move piece left
+  - [x] Swipe right: Move piece right
+  - [x] Swipe down: Soft drop
+  - [x] Long swipe down: Hard drop
+- [x] Add tap gesture recognition:
+  - [x] Single tap: Rotate piece
+  - [x] Double tap: Hold piece
+- [x] Configure gesture thresholds (distance, time)
+- [x] Add proper touch event cleanup
 
 ### Task 6.7: Input Debouncing - Testing (TDD)
 **Objective**: Test input processing and filtering
 
 **Checklist:**
-- [ ] Create tests for input debouncing utilities
-- [ ] Write test for rapid input filtering
-- [ ] Write test for gesture recognition accuracy
-- [ ] Write test for keyboard input processing
-- [ ] Test input priority handling (keyboard vs touch)
+- [x] Create tests for input debouncing utilities
+- [x] Write test for rapid input filtering
+- [x] Write test for gesture recognition accuracy
+- [x] Write test for keyboard input processing
+- [x] Test input priority handling (keyboard vs touch)
 
 ### Task 6.8: Game State Integration - Testing (TDD)
 **Objective**: Test complete game state transitions
 
 **Checklist:**
-- [ ] Write integration tests for piece movement
-- [ ] Write test for piece rotation with wall kicks
-- [ ] Write test for line clearing sequence
-- [ ] Write test for level progression
-- [ ] Write test for game over condition
-- [ ] Write test for pause/resume functionality
-- [ ] Write test for hold system integration
-- [ ] Test complete game session simulation
+- [x] Write integration tests for piece movement
+- [x] Write test for piece rotation with wall kicks
+- [x] Write test for line clearing sequence
+- [x] Write test for level progression
+- [x] Write test for game over condition
+- [x] Write test for pause/resume functionality
+- [x] Write test for hold system integration
+- [x] Test complete game session simulation
 
 ### Task 6.9: Game Logic Integration
 **Objective**: Ensure all game systems work together
 
 **Checklist:**
-- [ ] Test piece placement and lock timing
-- [ ] Verify line clearing triggers properly
-- [ ] Test score updates and level progression
-- [ ] Verify pause/resume state management
-- [ ] Test game over condition detection
-- [ ] Ensure ghost piece updates correctly
-- [ ] Test hold system with cooldowns
-- [ ] Verify all animations trigger properly
+- [x] Test piece placement and lock timing
+- [x] Verify line clearing triggers properly
+- [x] Test score updates and level progression
+- [x] Verify pause/resume state management
+- [x] Test game over condition detection
+- [x] Ensure ghost piece updates correctly
+- [x] Test hold system with cooldowns
+- [x] Verify all animations trigger properly
 
 ### Task 6.10: Performance Optimization
 **Objective**: Ensure smooth gameplay performance
 
 **Checklist:**
-- [ ] Profile game loop performance
-- [ ] Optimize state update frequency
-- [ ] Minimize unnecessary re-renders
-- [ ] Test performance on mobile devices
-- [ ] Ensure consistent 60fps gameplay
-- [ ] Optimize animation performance
-- [ ] Test memory usage over time
+- [x] Profile game loop performance
+- [x] Optimize state update frequency
+- [x] Minimize unnecessary re-renders
+- [x] Test performance on mobile devices
+- [x] Ensure consistent 60fps gameplay
+- [x] Optimize animation performance
+- [x] Test memory usage over time
 
 ### Task 6.11: Phase 6 Validation & Commit
 **Objective**: Validate game loop and controls functionality
 
 **Checklist:**
-- [ ] Run all tests: `bun test`
-- [ ] Test game runs at consistent 60fps
-- [ ] Verify all keyboard controls respond correctly
-- [ ] Test touch gestures work on mobile (or simulate)
-- [ ] Test pause/resume functionality
-- [ ] Verify game over conditions work
-- [ ] Test hold system with all controls
-- [ ] Verify level progression affects timing
-- [ ] Run type checking and linting
+- [x] Run all tests: `bun test`
+- [x] Test game runs at consistent 60fps
+- [x] Verify all keyboard controls respond correctly
+- [x] Test touch gestures work on mobile (or simulate)
+- [x] Test pause/resume functionality
+- [x] Verify game over conditions work
+- [x] Test hold system with all controls
+- [x] Verify level progression affects timing
+- [x] Run type checking and linting
 - [ ] Commit with message: "feat(controls): implement game loop, keyboard/touch controls with comprehensive integration tests"
 - [ ] Push to GitHub: `git push origin main`
 - [ ] Verify CI pipeline passes
 
 **Phase 6 Validation Criteria:**
-- [ ] Game runs at consistent 60fps
-- [ ] All controls respond correctly with appropriate cooldowns
-- [ ] Touch gestures work on mobile devices
-- [ ] Game state updates properly through all interactions
-- [ ] Pause/resume and game over conditions function correctly
+- [x] Game runs at consistent 60fps
+- [x] All controls respond correctly with appropriate cooldowns
+- [x] Touch gestures work on mobile devices
+- [x] Game state updates properly through all interactions
+- [x] Pause/resume and game over conditions function correctly
 
 ---
 
