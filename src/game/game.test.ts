@@ -816,18 +816,16 @@ describe("lock delay timer initialization", () => {
   test("should initialize lock delay with correct values", () => {
     const state = createInitialGameState();
 
-    if (!state.currentPiece) {
-      throw new Error("Current piece should not be null in initial state");
-    }
+    // Use a deterministic T-piece to avoid randomness issues in CI
+    const tPiece = createTetromino("T");
+    const pieceAtBottom: Tetromino = {
+      ...tPiece,
+      position: { x: 4, y: 1 }, // Place at known position
+    };
 
     // Create blocked board to trigger lock delay
     const blockedBoard = createEmptyBoardWithBuffer();
     blockedBoard[0] = Array(BOARD_CONSTANTS.WIDTH).fill(1); // Fill bottom row
-
-    const pieceAtBottom: Tetromino = {
-      ...state.currentPiece,
-      position: { x: state.currentPiece.position.x, y: 1 },
-    };
 
     const blockedState: GameState = {
       ...state,
