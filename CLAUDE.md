@@ -217,6 +217,13 @@ const useGameStore = create<GameStore>()((set) => ({
 - **When to use**: Only when investigating library updates, new features, or latest documentation
 - **Note**: Generally not used for regular development tasks
 
+### AivisSpeech
+- **Purpose**: Task completion audio notifications
+- **Usage**: Play audio notification when tasks are completed
+- **Settings**: Use speaker 888753760 (ノーマル), volume 0.3
+- **Message**: Japanese completion messages (e.g., "タスクが完了しました。お疲れ様でした。")
+- **When to use**: After completing significant tasks to provide audio feedback
+
 ## Deployment
 
 - Build target: Modern browsers with ES modules

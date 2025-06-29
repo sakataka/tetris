@@ -491,144 +491,144 @@ This document provides a comprehensive, step-by-step implementation guide for de
 **Objective**: Test game state management with Zustand
 
 **Checklist:**
-- [ ] Create `src/store/gameStore.test.ts` file
-- [ ] Write test for initial game state creation
-- [ ] Write test for `moveLeft()` action
-- [ ] Write test for `moveRight()` action
-- [ ] Write test for `moveDown()` action
-- [ ] Write test for `rotate()` action
-- [ ] Write test for `drop()` action (hard drop)
-- [ ] Write test for `holdPiece()` action
-- [ ] Write test for `togglePause()` action
-- [ ] Write test for `resetGame()` action
-- [ ] Write test for state immutability in all actions
+- [x] Create `src/store/gameStore.test.ts` file
+- [x] Write test for initial game state creation
+- [x] Write test for `moveLeft()` action
+- [x] Write test for `moveRight()` action
+- [x] Write test for `moveDown()` action
+- [x] Write test for `rotate()` action
+- [x] Write test for `drop()` action (hard drop)
+- [x] Write test for `holdPiece()` action
+- [x] Write test for `togglePause()` action
+- [x] Write test for `resetGame()` action
+- [x] Write test for state immutability in all actions
 
 ### Task 4.2: Game Store - Implementation
 **Objective**: Create Zustand game store with all actions
 
 **Checklist:**
-- [ ] Create `src/store/gameStore.ts` file
-- [ ] Set up Zustand store with devtools middleware
-- [ ] Implement initial state using `createInitialGameState()`
-- [ ] Implement `moveLeft()` action calling `moveTetrominoBy()`
-- [ ] Implement `moveRight()` action calling `moveTetrominoBy()`
-- [ ] Implement `moveDown()` action calling `moveTetrominoBy()`
-- [ ] Implement `rotate()` action calling `rotateTetrominoCW()`
-- [ ] Implement `drop()` action calling `hardDropTetromino()`
-- [ ] Implement `holdPiece()` action calling `holdCurrentPiece()`
-- [ ] Implement `togglePause()` and `resetGame()` actions
-- [ ] Add `clearAnimationData()` action for UI state cleanup
+- [x] Create `src/store/gameStore.ts` file
+- [x] Set up Zustand store with devtools middleware
+- [x] Implement initial state using `createInitialGameState()`
+- [x] Implement `moveLeft()` action calling `moveTetrominoBy()`
+- [x] Implement `moveRight()` action calling `moveTetrominoBy()`
+- [x] Implement `moveDown()` action calling `moveTetrominoBy()`
+- [x] Implement `rotate()` action calling `rotateTetrominoCW()`
+- [x] Implement `drop()` action calling `hardDropTetromino()`
+- [x] Implement `holdPiece()` action calling `holdCurrentPiece()`
+- [x] Implement `togglePause()` and `resetGame()` actions
+- [x] Add `clearAnimationData()` action for UI state cleanup
 
 ### Task 4.3: Settings Store - Testing (TDD)
 **Objective**: Test settings persistence and language management
 
 **Checklist:**
-- [ ] Create `src/store/settingsStore.test.ts` file
-- [ ] Write test for default settings initialization
-- [ ] Write test for `setLanguage()` action
-- [ ] Write test for `toggleGhostPiece()` action
-- [ ] Write test for localStorage persistence
-- [ ] Write test for settings loading from localStorage
-- [ ] Write test for invalid settings handling
-- [ ] Mock localStorage for testing environment
+- [x] Create `src/store/settingsStore.test.ts` file
+- [x] Write test for default settings initialization
+- [x] Write test for `setLanguage()` action
+- [x] Write test for `toggleGhostPiece()` action
+- [x] Write test for localStorage persistence
+- [x] Write test for settings loading from localStorage
+- [x] Write test for invalid settings handling
+- [x] Mock localStorage for testing environment
 
 ### Task 4.4: Settings Store - Implementation
 **Objective**: Create settings store with persistence
 
 **Checklist:**
-- [ ] Create `src/store/settingsStore.ts` file
-- [ ] Set up Zustand store with persist middleware
-- [ ] Define settings interface (language, ghostPiece, etc.)
-- [ ] Implement `setLanguage()` action with i18n integration
-- [ ] Implement `toggleGhostPiece()` action
-- [ ] Configure localStorage persistence with 'tetris-settings' key
-- [ ] Add settings validation for loaded data
-- [ ] Integrate with i18n language switching
+- [x] Create `src/store/settingsStore.ts` file
+- [x] Set up Zustand store with persist middleware
+- [x] Define settings interface (language, ghostPiece, etc.)
+- [x] Implement `setLanguage()` action with i18n integration
+- [x] Implement `toggleGhostPiece()` action
+- [x] Configure localStorage persistence with 'tetris-settings' key
+- [x] Add settings validation for loaded data
+- [x] Integrate with i18n language switching
 
 ### Task 4.5: High Score Store - Testing (TDD)
 **Objective**: Test high score calculation and persistence
 
 **Checklist:**
-- [ ] Create `src/store/highScoreStore.test.ts` file
-- [ ] Write test for empty high scores list initialization
-- [ ] Write test for `addHighScore()` action
-- [ ] Write test for high score sorting (highest first)
-- [ ] Write test for high score list limitation (top 10)
-- [ ] Write test for high score persistence
-- [ ] Write test for duplicate score handling
-- [ ] Write test for high score date formatting
+- [x] Create `src/store/highScoreStore.test.ts` file
+- [x] Write test for empty high scores list initialization
+- [x] Write test for `addHighScore()` action
+- [x] Write test for high score sorting (highest first)
+- [x] Write test for high score list limitation (top 10)
+- [x] Write test for high score persistence
+- [x] Write test for duplicate score handling
+- [x] Write test for high score date formatting
 
 ### Task 4.6: High Score Store - Implementation
 **Objective**: Create high score management system
 
 **Checklist:**
-- [ ] Create `src/store/highScoreStore.ts` file
-- [ ] Define `HighScoreEntry` interface
-- [ ] Set up Zustand store with persist middleware
-- [ ] Implement `addHighScore()` action with sorting
-- [ ] Implement high score list management (max 10 entries)
-- [ ] Add automatic date stamping for scores
-- [ ] Configure localStorage persistence with 'tetris-highscores' key
-- [ ] Add high score formatting utilities
+- [x] Create `src/store/highScoreStore.ts` file
+- [x] Define `HighScoreEntry` interface
+- [x] Set up Zustand store with persist middleware
+- [x] Implement `addHighScore()` action with sorting
+- [x] Implement high score list management (max 10 entries)
+- [x] Add automatic date stamping for scores
+- [x] Configure localStorage persistence with 'tetris-highscores' key
+- [x] Add high score formatting utilities
 
 ### Task 4.7: Translation Expansion
 **Objective**: Complete all game text translations
 
 **Checklist:**
-- [ ] Expand `src/locales/en.json` with all game text
-- [ ] Add game UI translations (score, level, lines, etc.)
-- [ ] Add control instructions translations
-- [ ] Add settings menu translations
-- [ ] Add game state translations (paused, game over, etc.)
-- [ ] Expand `src/locales/ja.json` with Japanese equivalents
-- [ ] Verify translation key consistency between files
-- [ ] Add validation for missing translation keys
+- [x] Expand `src/locales/en.json` with all game text
+- [x] Add game UI translations (score, level, lines, etc.)
+- [x] Add control instructions translations
+- [x] Add settings menu translations
+- [x] Add game state translations (paused, game over, etc.)
+- [x] Expand `src/locales/ja.json` with Japanese equivalents
+- [x] Verify translation key consistency between files
+- [x] Add validation for missing translation keys
 
 ### Task 4.8: i18n Integration Testing
 **Objective**: Ensure complete i18n functionality
 
 **Checklist:**
-- [ ] Test language switching affects all UI text
-- [ ] Test settings persistence across browser sessions
-- [ ] Test translation loading in both languages
-- [ ] Test fallback behavior for missing keys
-- [ ] Verify no hardcoded strings remain in code
-- [ ] Test responsive language detection
-- [ ] Document translation key naming conventions
+- [x] Test language switching affects all UI text
+- [x] Test settings persistence across browser sessions
+- [x] Test translation loading in both languages
+- [x] Test fallback behavior for missing keys
+- [x] Verify no hardcoded strings remain in code
+- [x] Test responsive language detection
+- [x] Document translation key naming conventions
 
 ### Task 4.9: Store Integration Testing
 **Objective**: Test store interactions and dependencies
 
 **Checklist:**
-- [ ] Test game store actions update state correctly
-- [ ] Test settings store changes persist correctly
-- [ ] Test high score store maintains proper sorting
-- [ ] Test store subscription and state change notifications
-- [ ] Test store performance with rapid state updates
-- [ ] Verify store devtools integration works
+- [x] Test game store actions update state correctly
+- [x] Test settings store changes persist correctly
+- [x] Test high score store maintains proper sorting
+- [x] Test store subscription and state change notifications
+- [x] Test store performance with rapid state updates
+- [x] Verify store devtools integration works
 
 ### Task 4.10: Phase 4 Validation & Commit
 **Objective**: Validate state management and i18n completion
 
 **Checklist:**
-- [ ] Run all tests: `bun test`
-- [ ] Test all store operations manually
-- [ ] Verify settings persist across browser sessions
-- [ ] Test language switching across all UI elements
-- [ ] Verify high score calculations and persistence
-- [ ] Confirm no hardcoded strings remain
-- [ ] Test state immutability in all stores
-- [ ] Run type checking and linting
-- [ ] Commit with message: "feat(store): implement Zustand stores with persistence and complete i18n integration"
-- [ ] Push to GitHub: `git push origin main`
-- [ ] Verify CI pipeline passes
+- [x] Run all tests: `bun test`
+- [x] Test all store operations manually
+- [x] Verify settings persist across browser sessions
+- [x] Test language switching across all UI elements
+- [x] Verify high score calculations and persistence
+- [x] Confirm no hardcoded strings remain
+- [x] Test state immutability in all stores
+- [x] Run type checking and linting
+- [x] Commit with message: "feat(store): implement Zustand stores with persistence and complete i18n integration"
+- [x] Push to GitHub: `git push origin main`
+- [x] Verify CI pipeline passes
 
 **Phase 4 Validation Criteria:**
-- [ ] All stores work with proper immutability
-- [ ] Settings persist across browser sessions
-- [ ] Language switching works throughout app
-- [ ] No hardcoded strings remain in codebase
-- [ ] High score system functions correctly
+- [x] All stores work with proper immutability
+- [x] Settings persist across browser sessions
+- [x] Language switching works throughout app
+- [x] No hardcoded strings remain in codebase
+- [x] High score system functions correctly
 
 ---
 
