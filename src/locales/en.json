@@ -42,6 +42,34 @@
       },
       "levelUp": "Level Up!",
       "newHighScore": "New High Score!"
+    },
+    "highScores": {
+      "title": "High Scores",
+      "rank": "Rank",
+      "score": "Score",
+      "lines": "Lines",
+      "level": "Level",
+      "date": "Date",
+      "noScores": "No high scores yet",
+      "noScoresDescription": "Play a game to set your first high score!",
+      "ranking": {
+        "1st": "1st",
+        "2nd": "2nd",
+        "3rd": "3rd",
+        "nth": "{{rank}}th"
+      },
+      "categories": {
+        "beginner": "Beginner",
+        "novice": "Novice",
+        "intermediate": "Intermediate",
+        "advanced": "Advanced",
+        "expert": "Expert",
+        "master": "Master",
+        "legendary": "Legendary"
+      },
+      "oneScore": "1 score recorded",
+      "multipleScores": "{{count}} scores recorded",
+      "showingTop": "Showing top {{max}} scores"
     }
   },
   "settings": {

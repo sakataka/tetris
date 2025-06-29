@@ -15,11 +15,20 @@
     "ci": "bun run lint && bun run typecheck && bun run test && bun run build"
   },
   "dependencies": {
+    "@radix-ui/react-dialog": "^1.1.14",
+    "@radix-ui/react-dropdown-menu": "^2.1.15",
+    "@radix-ui/react-label": "^2.1.7",
+    "@radix-ui/react-slot": "^1.2.3",
     "@vitejs/plugin-react-oxc": "^0.2.3",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.19.2",
     "i18next": "^25.2.1",
+    "lucide-react": "^0.525.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-i18next": "^15.5.3",
+    "tailwind-merge": "^3.3.1",
     "zustand": "^5.0.6"
   },
   "devDependencies": {

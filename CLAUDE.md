@@ -220,7 +220,11 @@ const useGameStore = create<GameStore>()((set) => ({
 ### AivisSpeech
 - **Purpose**: Task completion audio notifications
 - **Usage**: Play audio notification when tasks are completed
-- **Settings**: Use speaker 888753760 (ノーマル), volume 0.3
+- **Settings**: 
+  - Speaker: 888753763 
+  - Volume Scale: 0.3
+  - Speed Scale: 1.0 
+  - Pitch Scale: 0 
 - **Message**: Japanese completion messages (e.g., "タスクが完了しました。お疲れ様でした。")
 - **When to use**: After completing significant tasks to provide audio feedback
 

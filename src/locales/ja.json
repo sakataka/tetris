@@ -42,6 +42,34 @@
       },
       "levelUp": "レベルアップ！",
       "newHighScore": "新記録！"
+    },
+    "highScores": {
+      "title": "ハイスコア",
+      "rank": "順位",
+      "score": "スコア",
+      "lines": "ライン",
+      "level": "レベル",
+      "date": "日付",
+      "noScores": "まだハイスコアがありません",
+      "noScoresDescription": "ゲームをプレイして最初のハイスコアを登録しよう！",
+      "ranking": {
+        "1st": "1位",
+        "2nd": "2位",
+        "3rd": "3位",
+        "nth": "{{rank}}位"
+      },
+      "categories": {
+        "beginner": "初心者",
+        "novice": "初級者",
+        "intermediate": "中級者",
+        "advanced": "上級者",
+        "expert": "エキスパート",
+        "master": "マスター",
+        "legendary": "伝説"
+      },
+      "oneScore": "1件のスコア",
+      "multipleScores": "{{count}}件のスコア",
+      "showingTop": "上位{{max}}位を表示"
     }
   },
   "settings": {
