@@ -99,6 +99,7 @@ export function useKeyboardControls(config: KeyboardControlsConfig = {}) {
     resetGame,
     isGameOver,
     isPaused,
+    isPlaying,
   } = useGameStore();
 
   // Action cooldown management
@@ -153,7 +154,7 @@ export function useKeyboardControls(config: KeyboardControlsConfig = {}) {
         state.leftRepeatStarted = true;
         state.lastLeftTime = currentTime;
       } else if (state.leftRepeatStarted && timeSincePress >= dasSettings.repeatRate) {
-        if (isActionAllowed("movement") && !isPaused && !isGameOver) {
+        if (isActionAllowed("movement") && !isPaused && !isGameOver && isPlaying) {
           recordAction("movement");
           moveLeft();
           state.lastLeftTime = currentTime;
@@ -169,7 +170,7 @@ export function useKeyboardControls(config: KeyboardControlsConfig = {}) {
         state.rightRepeatStarted = true;
         state.lastRightTime = currentTime;
       } else if (state.rightRepeatStarted && timeSincePress >= dasSettings.repeatRate) {
-        if (isActionAllowed("movement") && !isPaused && !isGameOver) {
+        if (isActionAllowed("movement") && !isPaused && !isGameOver && isPlaying) {
           recordAction("movement");
           moveRight();
           state.lastRightTime = currentTime;
@@ -185,7 +186,7 @@ export function useKeyboardControls(config: KeyboardControlsConfig = {}) {
         state.downRepeatStarted = true;
         state.lastDownTime = currentTime;
       } else if (state.downRepeatStarted && timeSincePress >= dasSettings.softDropRate) {
-        if (isActionAllowed("drop") && !isPaused && !isGameOver) {
+        if (isActionAllowed("drop") && !isPaused && !isGameOver && isPlaying) {
           recordAction("drop");
           moveDown();
           state.lastDownTime = currentTime;
@@ -207,6 +208,7 @@ export function useKeyboardControls(config: KeyboardControlsConfig = {}) {
     moveDown,
     isPaused,
     isGameOver,
+    isPlaying,
   ]);
 
   // Handle keydown events
@@ -223,7 +225,7 @@ export function useKeyboardControls(config: KeyboardControlsConfig = {}) {
       if (isKeyMatch(key, keyBindings.moveLeft)) {
         if (!dasState.current.leftPressed) {
           // Initial press
-          if (isActionAllowed("movement") && !isPaused && !isGameOver) {
+          if (isActionAllowed("movement") && !isPaused && !isGameOver && isPlaying) {
             recordAction("movement");
             moveLeft();
           }
@@ -245,7 +247,7 @@ export function useKeyboardControls(config: KeyboardControlsConfig = {}) {
       if (isKeyMatch(key, keyBindings.moveRight)) {
         if (!dasState.current.rightPressed) {
           // Initial press
-          if (isActionAllowed("movement") && !isPaused && !isGameOver) {
+          if (isActionAllowed("movement") && !isPaused && !isGameOver && isPlaying) {
             recordAction("movement");
             moveRight();
           }
@@ -267,7 +269,7 @@ export function useKeyboardControls(config: KeyboardControlsConfig = {}) {
       if (isKeyMatch(key, keyBindings.softDrop)) {
         if (!dasState.current.downPressed) {
           // Initial press
-          if (isActionAllowed("drop") && !isPaused && !isGameOver) {
+          if (isActionAllowed("drop") && !isPaused && !isGameOver && isPlaying) {
             recordAction("drop");
             moveDown();
           }
@@ -288,7 +290,7 @@ export function useKeyboardControls(config: KeyboardControlsConfig = {}) {
 
       // Handle non-repeating keys (single action per press)
       if (isKeyMatch(key, keyBindings.hardDrop)) {
-        if (isActionAllowed("hardDrop") && !isPaused && !isGameOver) {
+        if (isActionAllowed("hardDrop") && !isPaused && !isGameOver && isPlaying) {
           recordAction("hardDrop");
           drop();
         }
@@ -296,7 +298,7 @@ export function useKeyboardControls(config: KeyboardControlsConfig = {}) {
       }
 
       if (isKeyMatch(key, keyBindings.rotateCW)) {
-        if (isActionAllowed("rotation") && !isPaused && !isGameOver) {
+        if (isActionAllowed("rotation") && !isPaused && !isGameOver && isPlaying) {
           recordAction("rotation");
           rotate();
         }
@@ -305,7 +307,7 @@ export function useKeyboardControls(config: KeyboardControlsConfig = {}) {
 
       if (isKeyMatch(key, keyBindings.rotateCCW)) {
         // TODO: Implement counter-clockwise rotation when available
-        if (isActionAllowed("rotation") && !isPaused && !isGameOver) {
+        if (isActionAllowed("rotation") && !isPaused && !isGameOver && isPlaying) {
           recordAction("rotation");
           // For now, use clockwise rotation
           rotate();
@@ -314,7 +316,7 @@ export function useKeyboardControls(config: KeyboardControlsConfig = {}) {
       }
 
       if (isKeyMatch(key, keyBindings.hold)) {
-        if (isActionAllowed("hold") && !isPaused && !isGameOver) {
+        if (isActionAllowed("hold") && !isPaused && !isGameOver && isPlaying) {
           recordAction("hold");
           holdPiece();
         }
@@ -357,6 +359,7 @@ export function useKeyboardControls(config: KeyboardControlsConfig = {}) {
       resetGame,
       isPaused,
       isGameOver,
+      isPlaying,
       enableDAS,
       executeDASRepeat,
     ]

@@ -1082,9 +1082,9 @@ This document provides a comprehensive, step-by-step implementation guide for de
 - [x] Verify game overlays work correctly
 - [x] Test mobile layout on touch devices
 - [x] Run type checking and linting
-- [ ] Commit with message: "feat(ui): complete responsive layouts, animations, and smooth transitions"
-- [ ] Push to GitHub: `git push origin main`
-- [ ] Verify CI pipeline passes
+- [x] Commit with message: "feat(ui): complete responsive layouts, animations, and smooth transitions"
+- [x] Push to GitHub: `git push origin main`
+- [x] Verify CI pipeline passes
 
 **Phase 7 Validation Criteria:**
 - [x] Layout adapts properly to all screen sizes
@@ -1174,31 +1174,7 @@ This document provides a comprehensive, step-by-step implementation guide for de
 - [ ] Test high score entry and persistence
 - [ ] Test settings changes during gameplay
 
-### Task 8.7: Mobile Touch Interaction Testing
-**Objective**: Validate touch controls and mobile responsiveness
-
-**Checklist:**
-- [ ] Test swipe gestures for piece movement
-- [ ] Test tap gestures for rotation
-- [ ] Test double-tap for hold functionality
-- [ ] Test mobile layout responsiveness
-- [ ] Test touch target sizes and accuracy
-- [ ] Test mobile keyboard interactions
-- [ ] Validate mobile game performance
-
-### Task 8.8: Language Switching Workflows
-**Objective**: Test complete internationalization functionality
-
-**Checklist:**
-- [ ] Test language switching from settings
-- [ ] Verify all UI text updates immediately
-- [ ] Test language persistence across sessions
-- [ ] Test right-to-left language support (if applicable)
-- [ ] Verify translation completeness
-- [ ] Test dynamic content translation
-- [ ] Test language switching during gameplay
-
-### Task 8.9: MCP Playwright Validation (Optional)
+### Task 8.7: MCP Playwright Validation (Optional)
 **Objective**: Use MCP tools for visual validation
 
 **Checklist:**
@@ -1210,7 +1186,7 @@ This document provides a comprehensive, step-by-step implementation guide for de
 - [ ] Test user interaction flows
 - [ ] Capture performance metrics
 
-### Task 8.10: Phase 8 Validation & Commit
+### Task 8.8: Phase 8 Validation & Commit
 **Objective**: Validate comprehensive testing completion
 
 **Checklist:**

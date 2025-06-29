@@ -50,7 +50,7 @@ export const TETROMINO_CONSTANTS = {
   MIN_GRID_SIZE: 2, // Minimum tetromino grid size (for O piece)
   TOTAL_PIECES: 7, // Number of different tetromino types
   ROTATION_STATES: 4, // Number of rotation states (0-3)
-  SPAWN_Y: 21, // Spawn Y position (in buffer area)
+  SPAWN_Y: 1, // Spawn Y position (in buffer area, near top)
 } as const;
 
 // Touch control constants

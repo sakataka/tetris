@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef } from "react";
 import { useGameStore } from "@/store/gameStore";
-import { useGameActions, useTimingState } from "@/store/gameStoreSelectors";
 import {
   calculateDeltaTime,
   calculateFallSpeed,
@@ -30,9 +29,17 @@ interface GameLoopOptions {
 export function useGameLoop(options: GameLoopOptions = {}) {
   const { targetFps = 60, enableFpsCounter = false, maxDeltaTime = 100 } = options;
 
-  // Use optimized selectors to minimize re-renders
-  const timingState = useTimingState();
-  const { moveDown, lockCurrentTetromino, shouldLockPiece, resetLockDelay } = useGameActions();
+  // Use individual selectors to avoid object recreation
+  const lockDelay = useGameStore((state) => state.lockDelay);
+  const level = useGameStore((state) => state.level);
+  const currentPiece = useGameStore((state) => state.currentPiece);
+  const isGameOver = useGameStore((state) => state.isGameOver);
+  const isPaused = useGameStore((state) => state.isPaused);
+  const isPlaying = useGameStore((state) => state.isPlaying);
+  const moveDown = useGameStore((state) => state.moveDown);
+  const lockCurrentTetromino = useGameStore((state) => state.lockCurrentTetromino);
+  const shouldLockPiece = useGameStore((state) => state.shouldLockPiece);
+  const resetLockDelay = useGameStore((state) => state.resetLockDelay);
 
   // Game loop state
   const loopState = useRef<GameLoopState>({
@@ -55,12 +62,7 @@ export function useGameLoop(options: GameLoopOptions = {}) {
    * Handle lock delay system with movement/rotation reset counting
    */
   const handleLockDelay = useCallback(() => {
-    if (
-      !timingState.lockDelay ||
-      timingState.isPaused ||
-      timingState.isGameOver ||
-      !timingState.currentPiece
-    ) {
+    if (!lockDelay || isPaused || isGameOver || !isPlaying || !currentPiece) {
       return;
     }
 
@@ -75,10 +77,11 @@ export function useGameLoop(options: GameLoopOptions = {}) {
       }
     }
   }, [
-    timingState.lockDelay,
-    timingState.isPaused,
-    timingState.isGameOver,
-    timingState.currentPiece,
+    lockDelay,
+    isPaused,
+    isGameOver,
+    isPlaying,
+    currentPiece,
     shouldLockPiece,
     lockCurrentTetromino,
     resetLockDelay,
@@ -89,11 +92,11 @@ export function useGameLoop(options: GameLoopOptions = {}) {
    */
   const handlePieceFall = useCallback(
     (deltaTime: number) => {
-      if (!timingState.currentPiece || timingState.isPaused || timingState.isGameOver) {
+      if (!currentPiece || isPaused || isGameOver || !isPlaying) {
         return;
       }
 
-      const fallSpeed = calculateFallSpeed(timingState.level);
+      const fallSpeed = calculateFallSpeed(level);
       loopState.current.fallAccumulator += deltaTime;
 
       if (loopState.current.fallAccumulator >= fallSpeed) {
@@ -103,19 +106,12 @@ export function useGameLoop(options: GameLoopOptions = {}) {
         const canMoveDown = moveDown();
 
         // If piece can't move down, check for lock delay
-        if (!canMoveDown && timingState.currentPiece) {
+        if (!canMoveDown && currentPiece) {
           handleLockDelay();
         }
       }
     },
-    [
-      timingState.currentPiece,
-      timingState.isPaused,
-      timingState.isGameOver,
-      timingState.level,
-      moveDown,
-      handleLockDelay,
-    ]
+    [currentPiece, isPaused, isGameOver, isPlaying, level, moveDown, handleLockDelay]
   );
 
   /**
@@ -165,7 +161,7 @@ export function useGameLoop(options: GameLoopOptions = {}) {
       loopState.current.accumulatedTime += cappedDeltaTime;
 
       // Only process game logic if not paused
-      if (!timingState.isPaused && !timingState.isGameOver) {
+      if (!isPaused && !isGameOver && isPlaying) {
         // Handle automatic piece falling
         handlePieceFall(cappedDeltaTime);
       }
@@ -177,8 +173,9 @@ export function useGameLoop(options: GameLoopOptions = {}) {
       animationFrameId.current = requestAnimationFrame(gameLoop);
     },
     [
-      timingState.isPaused,
-      timingState.isGameOver,
+      isPaused,
+      isGameOver,
+      isPlaying,
       handlePieceFall,
       updateFpsCounter,
       maxDeltaTime,
@@ -248,16 +245,16 @@ export function useGameLoop(options: GameLoopOptions = {}) {
 
   // Start loop when game is active, stop when game ends
   useEffect(() => {
-    if (!timingState.isGameOver && !timingState.isPaused) {
+    if (!isGameOver && !isPaused && isPlaying) {
       startLoop();
-    } else if (timingState.isGameOver) {
+    } else if (isGameOver) {
       stopLoop();
     }
 
     return () => {
       stopLoop();
     };
-  }, [timingState.isGameOver, timingState.isPaused, startLoop, stopLoop]);
+  }, [isGameOver, isPaused, isPlaying, startLoop, stopLoop]);
 
   // Cleanup on unmount
   useEffect(() => {
@@ -266,18 +263,15 @@ export function useGameLoop(options: GameLoopOptions = {}) {
     };
   }, [stopLoop]);
 
-  // Reset timers when game resets (using full state for reset detection)
-  const gameResetState = useGameStore((state) => ({
-    score: state.score,
-    lines: state.lines,
-    level: state.level,
-  }));
+  // Reset timers when game resets (using separate selectors to avoid object recreation)
+  const score = useGameStore((state) => state.score);
+  const lines = useGameStore((state) => state.lines);
 
   useEffect(() => {
-    if (gameResetState.score === 0 && gameResetState.lines === 0 && gameResetState.level === 1) {
+    if (score === 0 && lines === 0 && level === 1) {
       resetTimers();
     }
-  }, [gameResetState.score, gameResetState.lines, gameResetState.level, resetTimers]);
+  }, [score, lines, level, resetTimers]);
 
   return {
     startLoop,

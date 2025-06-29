@@ -31,6 +31,52 @@ import { createTetromino } from "./tetrominos";
 import { tryRotateClockwise } from "./wallKick";
 
 /**
+ * Creates the pre-game state (before game starts)
+ * @returns New pre-game state with no current piece
+ */
+export function createPreGameState(): GameState {
+  const board = createEmptyBoard();
+  const boardWithBuffer = createEmptyBoardWithBuffer();
+  const initialLevel = SCORING_CONSTANTS.STARTING_LEVEL;
+
+  return {
+    // Board and pieces
+    board,
+    boardWithBuffer,
+    currentPiece: null, // No piece before game starts
+    nextPiece: null,
+    heldPiece: null,
+    canHold: true,
+
+    // Scoring and progression
+    score: SCORING_CONSTANTS.BASE_SCORES[0],
+    lines: 0,
+    level: initialLevel,
+
+    // Game state flags
+    isGameOver: false,
+    isPaused: false,
+    isPlaying: false,
+
+    // Game mechanics
+    ghostPosition: null,
+    pieceBag: createPieceBag(),
+    lockDelay: null,
+
+    // Timing
+    lastDropTime: Date.now(),
+    dropInterval: 1000, // Initial drop interval (will be recalculated based on level)
+    gameStartTime: Date.now(),
+    totalGameTime: 0,
+
+    // Animations
+    linesClearing: [],
+    animationInProgress: false,
+    lineClearAnimation: null,
+  };
+}
+
+/**
  * Creates the initial game state
  * @returns New initial game state
  */
@@ -69,7 +115,7 @@ export function createInitialGameState(): GameState {
     // Game state flags
     isGameOver: false,
     isPaused: false,
-    isPlaying: false,
+    isPlaying: true,
 
     // Game mechanics
     ghostPosition: null, // Will be calculated when needed

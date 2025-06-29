@@ -3,16 +3,22 @@
     "title": "Tetris",
     "score": {
       "title": "Score",
+      "score": "Score",
       "lines": "Lines",
       "level": "Level"
     },
     "controls": {
+      "title": "Controls",
       "move": "Move",
       "rotate": "Rotate",
       "drop": "Drop",
+      "softDrop": "Soft Drop",
+      "hardDrop": "Hard Drop",
       "hold": "Hold",
       "pause": "Pause",
-      "resume": "Resume"
+      "resume": "Resume",
+      "start": "Start Game",
+      "restart": "Restart"
     },
     "states": {
       "gameOver": "Game Over",
@@ -24,7 +30,16 @@
       "next": "Next",
       "hold": "Hold",
       "ghost": "Ghost Piece",
-      "preview": "Piece Preview"
+      "preview": "Piece Preview",
+      "board": "Game Board",
+      "empty": "Empty"
+    },
+    "settings": {
+      "title": "Settings"
+    },
+    "feedback": {
+      "canHold": "Hold available",
+      "holdUsed": "Hold used"
     },
     "layout": {
       "mainGame": "Main Game Area",
@@ -34,6 +49,7 @@
       "mobileHeader": "Game Statistics Header"
     },
     "instructions": {
+      "start": "Press Enter or click button to start",
       "pauseResume": "Press P or Esc to resume",
       "restart": "Press R to restart game",
       "tapToResume": "Tap anywhere to resume",

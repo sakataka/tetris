@@ -147,6 +147,7 @@ export function createTetromino(
     position,
     rotation,
     shape: rotatedShape,
+    colorIndex: getTetrominoColorIndex(pieceType),
   };
 }
 

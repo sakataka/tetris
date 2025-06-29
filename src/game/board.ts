@@ -237,8 +237,10 @@ export function isGameOver(board: GameBoardWithBuffer, newPiece: Tetromino): boo
  * @returns Visible portion of the board (20x10)
  */
 export function getVisibleBoard(boardWithBuffer: GameBoardWithBuffer): GameBoard {
-  // Return only the visible portion (rows 0-19)
-  return boardWithBuffer.slice(0, GAME_CONSTANTS.BOARD.HEIGHT).map((row) => [...row]);
+  // Return only the visible portion (rows 4-23, skip buffer rows 0-3)
+  return boardWithBuffer
+    .slice(GAME_CONSTANTS.BOARD.BUFFER_HEIGHT, GAME_CONSTANTS.BOARD.TOTAL_HEIGHT)
+    .map((row) => [...row]);
 }
 
 /**

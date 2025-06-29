@@ -1,4 +1,5 @@
 import type React from "react";
+import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useGameStore } from "@/store/gameStore";
 import type { Position, Tetromino } from "@/types/game";
@@ -48,20 +49,47 @@ const isPositionInGhost = (
 
 export const Board: React.FC<BoardProps> = ({ className = "" }) => {
   const { t } = useTranslation();
-  const { board, currentPiece, ghostPosition, linesClearing } = useGameStore();
+  const board = useGameStore((state) => state.board);
+  const currentPiece = useGameStore((state) => state.currentPiece);
+  const ghostPosition = useGameStore((state) => state.ghostPosition);
+  const linesClearing = useGameStore((state) => state.linesClearing);
 
   const boardClassName = `
     grid grid-cols-10
     gap-0
-    border-2 border-gray-600
-    bg-gray-800
+    border-2 border-gray-700
+    bg-gray-900
     mx-auto
-    w-full max-w-xs
-    sm:max-w-sm
-    md:max-w-md
-    lg:max-w-lg
+    rounded-lg
+    shadow-2xl
     ${className}
   `.trim();
+
+  const cells = useMemo(() => {
+    return board.map((row, rowIndex) =>
+      row.map((cellValue, colIndex) => {
+        const isCurrentPiece = isPositionInCurrentPiece(rowIndex, colIndex, currentPiece);
+        const isGhost = isPositionInGhost(rowIndex, colIndex, currentPiece, ghostPosition);
+        const isClearing = linesClearing.includes(rowIndex);
+
+        // Use the piece's color value for current piece and ghost cells
+        const displayValue =
+          (isCurrentPiece || isGhost) && currentPiece ? currentPiece.colorIndex : cellValue;
+
+        return (
+          <BoardCell
+            key={`${rowIndex}-${colIndex}`}
+            value={displayValue}
+            isGhost={isGhost && !isCurrentPiece}
+            isCurrentPiece={isCurrentPiece}
+            isClearing={isClearing}
+            row={rowIndex}
+            col={colIndex}
+          />
+        );
+      })
+    );
+  }, [board, currentPiece, ghostPosition, linesClearing]);
 
   return (
     <div
@@ -71,37 +99,11 @@ export const Board: React.FC<BoardProps> = ({ className = "" }) => {
       aria-rowcount={GAME_CONSTANTS.BOARD.HEIGHT}
       aria-colcount={GAME_CONSTANTS.BOARD.WIDTH}
       style={{
-        aspectRatio: `${GAME_CONSTANTS.BOARD.WIDTH} / ${GAME_CONSTANTS.BOARD.HEIGHT}`,
+        width: "300px",
+        height: "600px",
       }}
     >
-      {board.map((row, rowIndex) =>
-        row.map((cellValue, colIndex) => {
-          const isCurrentPiece = isPositionInCurrentPiece(rowIndex, colIndex, currentPiece);
-          const isGhost = isPositionInGhost(rowIndex, colIndex, currentPiece, ghostPosition);
-          const isClearing = linesClearing.includes(rowIndex);
-
-          // If current piece occupies this position, show the piece color
-          const displayValue =
-            isCurrentPiece && currentPiece
-              ? GAME_CONSTANTS.COLORS[
-                  `${currentPiece.type}_PIECE` as keyof typeof GAME_CONSTANTS.COLORS
-                ]
-              : cellValue;
-
-          return (
-            <BoardCell
-              key={`${rowIndex}-${colIndex}`}
-              value={displayValue}
-              isGhost={isGhost && !isCurrentPiece}
-              isCurrentPiece={isCurrentPiece}
-              isClearing={isClearing}
-              row={rowIndex}
-              col={colIndex}
-              animationKey={`${rowIndex}-${colIndex}-${displayValue}-${isCurrentPiece ? "current" : ""}-${isGhost ? "ghost" : ""}`}
-            />
-          );
-        })
-      )}
+      {cells}
     </div>
   );
 };

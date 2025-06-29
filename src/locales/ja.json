@@ -3,16 +3,22 @@
     "title": "テトリス",
     "score": {
       "title": "スコア",
+      "score": "スコア",
       "lines": "ライン",
       "level": "レベル"
     },
     "controls": {
+      "title": "操作方法",
       "move": "移動",
       "rotate": "回転",
       "drop": "落下",
+      "softDrop": "ソフトドロップ",
+      "hardDrop": "ハードドロップ",
       "hold": "ホールド",
       "pause": "一時停止",
-      "resume": "再開"
+      "resume": "再開",
+      "start": "ゲーム開始",
+      "restart": "再スタート"
     },
     "states": {
       "gameOver": "ゲームオーバー",
@@ -24,7 +30,16 @@
       "next": "次のピース",
       "hold": "ホールド",
       "ghost": "ゴーストピース",
-      "preview": "ピースプレビュー"
+      "preview": "ピースプレビュー",
+      "board": "ゲーム盤面",
+      "empty": "空"
+    },
+    "settings": {
+      "title": "設定"
+    },
+    "feedback": {
+      "canHold": "ホールド可能",
+      "holdUsed": "ホールド使用済み"
     },
     "layout": {
       "mainGame": "メインゲーム画面",
@@ -34,6 +49,7 @@
       "mobileHeader": "ゲーム統計ヘッダー"
     },
     "instructions": {
+      "start": "Enterキーまたはボタンクリックでゲーム開始",
       "pauseResume": "PキーまたはEscキーで再開",
       "restart": "Rキーでゲーム再開",
       "tapToResume": "タップして再開",

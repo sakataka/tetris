@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { devtools, subscribeWithSelector } from "zustand/middleware";
 import {
   createInitialGameState,
+  createPreGameState,
   hardDropTetromino,
   holdCurrentPiece,
   lockCurrentTetromino,
@@ -28,6 +29,7 @@ export interface GameStore extends GameState {
   holdPiece: () => void;
   togglePause: () => void;
   resetGame: () => void;
+  startGame: () => void;
   clearAnimationData: () => void;
   startLineClearAnimation: (clearedLines: number[]) => void;
   updateLineClearAnimation: () => void;
@@ -103,7 +105,9 @@ export const useGameStore = create<GameStore>()(
             isPaused: !state.isPaused,
           })),
 
-        resetGame: () => set(() => createInitialGameState()),
+        resetGame: () => set(() => createPreGameState()),
+
+        startGame: () => set(() => createInitialGameState()),
 
         // Clear animation-related data (for UI state cleanup)
         clearAnimationData: () =>

@@ -20,12 +20,6 @@ export interface BoardCellProps {
   col: number;
   animationKey?: string | number; // For triggering animations on state changes
   className?: string;
-  // Enhanced animation states
-  isLocking?: boolean;
-  justPlaced?: boolean;
-  isRotating?: boolean;
-  isHardDropped?: boolean;
-  animationTrigger?: "lock" | "place" | "rotate" | "hardDrop" | "none";
 }
 
 export interface CellState {
@@ -197,12 +191,6 @@ export const BoardCell: React.FC<BoardCellProps> = ({
     if (isClearing && lineClearAnimationPhase !== "idle") {
       return lineClearAnimationPhase;
     }
-
-    // Handle piece animation triggers
-    if (animationTrigger === "hardDrop") return "hardLanded";
-    if (animationTrigger === "rotate") return "rotating";
-    if (animationTrigger === "place") return "placed";
-    if (animationTrigger === "lock" || isLocking) return "locked";
 
     // Handle state-based animations
     if (isGhost) return "ghost";
