@@ -1,0 +1,26 @@
+pre-commit:
+  parallel: true
+  commands:
+    format:
+      glob: "*.{js,ts,jsx,tsx,json,md}"
+      run: bun run format
+      stage_fixed: true  # Auto-stage formatted files
+    
+    lint:
+      glob: "*.{js,ts,jsx,tsx}"
+      run: bun run lint
+      stage_fixed: true
+
+commit-msg:
+  commands:
+    commitlint:
+      run: |
+        # Validate commit message format
+        if ! grep -qE "^(feat|fix|docs|style|refactor|test|chore)(\(.+\))?: .+" {1}; then
+          echo "❌ Commit message must follow Conventional Commits format"
+          echo "Examples:"
+          echo "  feat(game): add new feature"
+          echo "  fix(ui): resolve button styling issue"
+          echo "  docs: update README"
+          exit 1
+        fi
