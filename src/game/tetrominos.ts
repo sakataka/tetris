@@ -4,7 +4,7 @@
  */
 
 import type { CellValue, RotationState, Tetromino, TetrominoTypeName } from "../types/game";
-import { COLOR_CONSTANTS, GAME_CONSTANTS } from "../utils/gameConstants";
+import { COLOR_CONSTANTS } from "../utils/gameConstants";
 import { getSpawnPosition } from "./board";
 
 // Tetromino color mapping

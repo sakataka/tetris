@@ -4,7 +4,7 @@
  */
 
 import { describe, expect, test } from "bun:test";
-import type { GameBoard, GameBoardWithBuffer, Position, Tetromino } from "../types/game";
+import type { Position, Tetromino } from "../types/game";
 import { GAME_CONSTANTS } from "../utils/gameConstants";
 import {
   clearLines,

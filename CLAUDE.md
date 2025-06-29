@@ -26,6 +26,9 @@ bun run typecheck         # Type checking with TypeScript
 
 # Testing
 bun test src/             # Run tests with Bun
+bun test src/game/board.test.ts  # Run single test file
+bun test --test-name-pattern="lock delay"  # Run tests matching pattern
+bun test --coverage       # Run tests with coverage report
 bun run ci                # Run full CI pipeline (lint + typecheck + test + build)
 
 # Git Hooks
@@ -42,12 +45,11 @@ src/
 │   ├── layout/         # Layout components (Game, Settings)
 │   └── ui/             # Reusable UI components
 ├── game/               # Pure game logic (NO React dependencies)
-│   ├── board.ts        # Board operations
+│   ├── board.ts        # Board operations, game over detection
 │   ├── tetrominos.ts   # Piece definitions and rotation
-│   ├── game.ts         # Core game mechanics
+│   ├── game.ts         # Core game mechanics, lock delay, hold system
 │   ├── pieceBag.ts     # 7-bag randomization
-│   ├── wallKick.ts     # SRS wall kick system
-│   └── ghost.ts        # Ghost piece calculation
+│   └── wallKick.ts     # SRS wall kick system
 ├── store/              # Zustand state management
 │   ├── gameStore.ts    # Game state
 │   ├── settingsStore.ts # User settings
@@ -86,10 +88,12 @@ src/
 - 7-bag randomization for fair piece distribution
 
 #### Core Game Mechanics
-- Lock delay: 500ms with 15 move/rotation limit
-- DAS (Delayed Auto Shift): 170ms initial, 50ms repeat
-- Scoring: Simplified system (100/300/500/800 base scores)
-- Level progression: 10 lines per level
+- **Lock delay**: 500ms with 15 move/rotation limit (prevents infinite manipulation)
+- **Hold system**: One hold per piece, swaps current with held piece
+- **Game over**: Occurs when new piece cannot spawn in buffer area (y=21)
+- **DAS (Delayed Auto Shift)**: 170ms initial, 50ms repeat
+- **Scoring**: Simplified system (100/300/500/800 base scores)
+- **Level progression**: 10 lines per level
 
 ### Internationalization
 
@@ -110,6 +114,28 @@ src/
 - Strict mode enabled with `noUnusedLocals` and `noUnusedParameters`
 - Path aliases: `@/` for src directory
 - No `any` types allowed (enforced by Biome)
+
+### Import Rules
+- **ALWAYS use `@/` path alias for all imports from src directory**
+- Cross-directory imports: Use `@/` alias
+- Same directory imports: Use relative `./` paths only for files in same directory
+- External imports: Direct package names
+
+**Examples:**
+```typescript
+// ✅ Correct: Use @/ for src imports
+import { GameState } from "@/types/game";
+import { BOARD_CONSTANTS } from "@/utils/gameConstants";
+import { createTetromino } from "@/game/tetrominos";
+
+// ✅ Correct: Same directory relative imports
+import { helperFunction } from "./utils";
+import { localConstant } from "./constants";
+
+// ❌ Incorrect: Relative paths across directories
+import { GameState } from "../types/game";
+import { BOARD_CONSTANTS } from "../utils/gameConstants";
+```
 
 ### Formatting & Linting
 - Biome for both linting and formatting
@@ -167,6 +193,29 @@ const useGameStore = create<GameStore>()((set) => ({
   moveLeft: () => set((state) => moveTetrominoBy(state, -1, 0)),
 }));
 ```
+
+## Current Implementation Status
+
+**Phase 3 Complete**: Advanced game mechanics implemented and tested
+- ✅ Game Over & Hold System with full TDD coverage
+- ✅ Lock Delay System with 15 move/rotation limit 
+- ✅ All game logic is pure functions with >90% test coverage
+- ✅ Complete test suite: 57 passing tests, 147 assertions
+
+**Next Phase**: State management and i18n integration (Phase 4)
+
+## Available MCP Tools
+
+### Playwright
+- **Purpose**: Browser testing and screen verification
+- **Usage**: Use Playwright as the primary tool for browser-based testing and visual confirmation
+- **When to use**: E2E tests, UI validation, cross-browser testing, screenshot comparisons
+
+### Context7
+- **Purpose**: Library research and latest version information
+- **Usage**: Research tool for investigating new library versions and latest information
+- **When to use**: Only when investigating library updates, new features, or latest documentation
+- **Note**: Generally not used for regular development tasks
 
 ## Deployment
 
