@@ -81,4 +81,4 @@ export interface StorageValidationResult<T> {
 }
 
 // Migration function type
-export type StorageMigration = (oldData: any) => StorageSchema;
+export type StorageMigration = (oldData: unknown) => StorageSchema;

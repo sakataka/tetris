@@ -31,12 +31,12 @@ describe("isValidCellValue", () => {
   });
 
   test("should return false for non-number values", () => {
-    expect(isValidCellValue("0" as any)).toBe(false);
-    expect(isValidCellValue(null as any)).toBe(false);
-    expect(isValidCellValue(undefined as any)).toBe(false);
-    expect(isValidCellValue({} as any)).toBe(false);
-    expect(isValidCellValue([] as any)).toBe(false);
-    expect(isValidCellValue(true as any)).toBe(false);
+    expect(isValidCellValue("0" as unknown)).toBe(false);
+    expect(isValidCellValue(null as unknown)).toBe(false);
+    expect(isValidCellValue(undefined as unknown)).toBe(false);
+    expect(isValidCellValue({} as unknown)).toBe(false);
+    expect(isValidCellValue([] as unknown)).toBe(false);
+    expect(isValidCellValue(true as unknown)).toBe(false);
   });
 });
 
@@ -56,12 +56,12 @@ describe("isValidRotationState", () => {
   });
 
   test("should return false for non-number values", () => {
-    expect(isValidRotationState("0" as any)).toBe(false);
-    expect(isValidRotationState(null as any)).toBe(false);
-    expect(isValidRotationState(undefined as any)).toBe(false);
-    expect(isValidRotationState({} as any)).toBe(false);
-    expect(isValidRotationState([] as any)).toBe(false);
-    expect(isValidRotationState(true as any)).toBe(false);
+    expect(isValidRotationState("0" as unknown)).toBe(false);
+    expect(isValidRotationState(null as unknown)).toBe(false);
+    expect(isValidRotationState(undefined as unknown)).toBe(false);
+    expect(isValidRotationState({} as unknown)).toBe(false);
+    expect(isValidRotationState([] as unknown)).toBe(false);
+    expect(isValidRotationState(true as unknown)).toBe(false);
   });
 });
 
@@ -131,11 +131,11 @@ describe("isValidTetrominoType", () => {
   });
 
   test("should return false for non-string values", () => {
-    expect(isValidTetrominoType(1 as any)).toBe(false);
-    expect(isValidTetrominoType(null as any)).toBe(false);
-    expect(isValidTetrominoType(undefined as any)).toBe(false);
-    expect(isValidTetrominoType({} as any)).toBe(false);
-    expect(isValidTetrominoType([] as any)).toBe(false);
-    expect(isValidTetrominoType(true as any)).toBe(false);
+    expect(isValidTetrominoType(1 as unknown)).toBe(false);
+    expect(isValidTetrominoType(null as unknown)).toBe(false);
+    expect(isValidTetrominoType(undefined as unknown)).toBe(false);
+    expect(isValidTetrominoType({} as unknown)).toBe(false);
+    expect(isValidTetrominoType([] as unknown)).toBe(false);
+    expect(isValidTetrominoType(true as unknown)).toBe(false);
   });
 });
