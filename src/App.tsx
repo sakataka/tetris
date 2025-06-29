@@ -1,10 +1,17 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import viteLogo from "/vite.svg";
 import reactLogo from "./assets/react.svg";
 import "./App.css";
 
 function App() {
   const [count, setCount] = useState(0);
+  const { t, i18n } = useTranslation();
+
+  const toggleLanguage = () => {
+    const newLang = i18n.language === "en" ? "ja" : "en";
+    i18n.changeLanguage(newLang);
+  };
 
   return (
     <>
@@ -16,16 +23,46 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>Vite + React</h1>
+      <h1>{t("game.title")}</h1>
       <div className="card">
         <button type="button" onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+          {t("game.score.title")}: {count}
         </button>
         <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
+          {t("ui.editFile")} <code>src/App.tsx</code> {t("ui.andSave")}
         </p>
+        <div className="language-controls">
+          <button type="button" onClick={toggleLanguage}>
+            {t("settings.language")}: {t(`languages.${i18n.language}`)}
+          </button>
+          <p>
+            {t("debug.currentLanguage")}: {i18n.language}
+          </p>
+        </div>
       </div>
-      <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
+      <div className="tetris-preview">
+        <h2>{t("game.pieces.next")}</h2>
+        <p>{t("game.score.lines")}: 0</p>
+        <p>{t("game.score.level")}: 1</p>
+        <p>{t("game.states.ready")}</p>
+        <div className="debug-info">
+          <h3>{t("debug.title")}:</h3>
+          <p>
+            {t("debug.initialized")}: {i18n.isInitialized ? "✅" : "❌"}
+          </p>
+          <p>
+            {t("debug.currentLanguage")}: {i18n.language}
+          </p>
+          <p>
+            {t("debug.availableLanguages")}: {i18n.languages.join(", ")}
+          </p>
+          <p>
+            {t("debug.localStorageValue")}:{" "}
+            {localStorage.getItem("tetris-language") || t("debug.none")}
+          </p>
+        </div>
+      </div>
+      <p className="read-the-docs">{t("ui.clickLogos")}</p>
     </>
   );
 }

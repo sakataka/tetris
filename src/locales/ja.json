@@ -1,0 +1,90 @@
+{
+  "game": {
+    "title": "テトリス",
+    "score": {
+      "title": "スコア",
+      "lines": "ライン",
+      "level": "レベル"
+    },
+    "controls": {
+      "move": "移動",
+      "rotate": "回転",
+      "drop": "落下",
+      "hold": "ホールド",
+      "pause": "一時停止",
+      "resume": "再開"
+    },
+    "states": {
+      "gameOver": "ゲームオーバー",
+      "paused": "一時停止中",
+      "playing": "プレイ中",
+      "ready": "準備完了"
+    },
+    "pieces": {
+      "next": "次のピース",
+      "hold": "ホールド",
+      "ghost": "ゴーストピース"
+    },
+    "actions": {
+      "newGame": "新しいゲーム",
+      "restart": "再スタート",
+      "settings": "設定",
+      "highScores": "ハイスコア"
+    }
+  },
+  "settings": {
+    "title": "設定",
+    "language": "言語",
+    "showGhostPiece": "ゴーストピースを表示",
+    "controls": "コントロール",
+    "close": "閉じる"
+  },
+  "languages": {
+    "en": "English",
+    "ja": "日本語"
+  },
+  "highScores": {
+    "title": "ハイスコア",
+    "rank": "順位",
+    "score": "スコア",
+    "lines": "ライン",
+    "level": "レベル",
+    "date": "日付",
+    "noScores": "まだハイスコアはありません"
+  },
+  "controls": {
+    "keyboard": {
+      "title": "キーボード操作",
+      "moveLeft": "左移動",
+      "moveRight": "右移動",
+      "softDrop": "ソフトドロップ",
+      "hardDrop": "ハードドロップ",
+      "rotateCW": "時計回り回転",
+      "rotateCCW": "反時計回り回転",
+      "hold": "ピースホールド",
+      "pause": "一時停止/再開"
+    },
+    "touch": {
+      "title": "タッチ操作",
+      "swipeLeft": "左スワイプで左移動",
+      "swipeRight": "右スワイプで右移動",
+      "swipeDown": "下スワイプでソフトドロップ",
+      "longSwipeDown": "長い下スワイプでハードドロップ",
+      "tap": "タップで回転",
+      "doubleTap": "ダブルタップでホールド"
+    }
+  },
+  "debug": {
+    "title": "デバッグ情報",
+    "initialized": "i18n初期化済み",
+    "currentLanguage": "現在の言語",
+    "availableLanguages": "利用可能な言語",
+    "localStorageValue": "localStorage値",
+    "none": "なし"
+  },
+  "ui": {
+    "editFile": "編集",
+    "andSave": "して保存でHMRをテスト",
+    "clickLogos": "ViteとReactのロゴをクリックして詳細を確認"
+  }
+}

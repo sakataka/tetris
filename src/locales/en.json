@@ -1,0 +1,90 @@
+{
+  "game": {
+    "title": "Tetris",
+    "score": {
+      "title": "Score",
+      "lines": "Lines",
+      "level": "Level"
+    },
+    "controls": {
+      "move": "Move",
+      "rotate": "Rotate",
+      "drop": "Drop",
+      "hold": "Hold",
+      "pause": "Pause",
+      "resume": "Resume"
+    },
+    "states": {
+      "gameOver": "Game Over",
+      "paused": "Paused",
+      "playing": "Playing",
+      "ready": "Ready"
+    },
+    "pieces": {
+      "next": "Next",
+      "hold": "Hold",
+      "ghost": "Ghost Piece"
+    },
+    "actions": {
+      "newGame": "New Game",
+      "restart": "Restart",
+      "settings": "Settings",
+      "highScores": "High Scores"
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "showGhostPiece": "Show Ghost Piece",
+    "controls": "Controls",
+    "close": "Close"
+  },
+  "languages": {
+    "en": "English",
+    "ja": "日本語"
+  },
+  "highScores": {
+    "title": "High Scores",
+    "rank": "Rank",
+    "score": "Score",
+    "lines": "Lines",
+    "level": "Level",
+    "date": "Date",
+    "noScores": "No high scores yet"
+  },
+  "controls": {
+    "keyboard": {
+      "title": "Keyboard Controls",
+      "moveLeft": "Move Left",
+      "moveRight": "Move Right",
+      "softDrop": "Soft Drop",
+      "hardDrop": "Hard Drop",
+      "rotateCW": "Rotate Clockwise",
+      "rotateCCW": "Rotate Counter-Clockwise",
+      "hold": "Hold Piece",
+      "pause": "Pause/Resume"
+    },
+    "touch": {
+      "title": "Touch Controls",
+      "swipeLeft": "Swipe Left to Move Left",
+      "swipeRight": "Swipe Right to Move Right",
+      "swipeDown": "Swipe Down for Soft Drop",
+      "longSwipeDown": "Long Swipe Down for Hard Drop",
+      "tap": "Tap to Rotate",
+      "doubleTap": "Double Tap to Hold"
+    }
+  },
+  "debug": {
+    "title": "Debug Info",
+    "initialized": "i18n initialized",
+    "currentLanguage": "Current language",
+    "availableLanguages": "Available languages",
+    "localStorageValue": "localStorage value",
+    "none": "none"
+  },
+  "ui": {
+    "editFile": "Edit",
+    "andSave": "and save to test HMR",
+    "clickLogos": "Click on the Vite and React logos to learn more"
+  }
+}

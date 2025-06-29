@@ -73,80 +73,80 @@ This document provides a comprehensive, step-by-step implementation guide for de
 **Objective**: Initialize Git repository and GitHub integration
 
 **Checklist:**
-- [ ] Initialize Git repository: `git init`
-- [ ] Create comprehensive `.gitignore` file
-- [ ] Add GitHub remote: `git remote add origin [repository-url]`
-- [ ] Create initial commit with foundation files
-- [ ] Push to GitHub: `git push -u origin main`
-- [ ] Verify repository is accessible on GitHub
+- [x] Initialize Git repository: `git init`
+- [x] Create comprehensive `.gitignore` file
+- [x] Add GitHub remote: `git remote add origin [repository-url]`
+- [x] Create initial commit with foundation files
+- [x] Push to GitHub: `git push -u origin main`
+- [x] Verify repository is accessible on GitHub
 
 ### Task 1.6: GitHub Actions CI/CD
 **Objective**: Set up automated testing and build pipeline
 
 **Checklist:**
-- [ ] Create `.github/workflows/ci.yml` file
-- [ ] Configure CI to run on push/PR to main branch
-- [ ] Add Bun setup step with version 1.2.17
-- [ ] Add dependency installation step
-- [ ] Add linting step: `bun run lint`
-- [ ] Add type checking step: `bun run typecheck`
-- [ ] Add test step: `bun test`
-- [ ] Add build step: `bun run build`
-- [ ] Test CI pipeline with a test commit
+- [x] Create `.github/workflows/ci.yml` file
+- [x] Configure CI to run on push/PR to main branch
+- [x] Add Bun setup step with version 1.2.17
+- [x] Add dependency installation step
+- [x] Add linting step: `bun run lint`
+- [x] Add type checking step: `bun run typecheck`
+- [x] Add test step: `bun test`
+- [x] Add build step: `bun run build`
+- [x] Test CI pipeline with a test commit
 
 ### Task 1.7: Pre-commit Hooks with Lefthook
 **Objective**: Automate code quality checks before commits
 
 **Checklist:**
-- [ ] Install Lefthook: `bun add -D lefthook`
-- [ ] Create `lefthook.yml` configuration file
-- [ ] Configure pre-commit hooks for formatting and linting
-- [ ] Configure commit message validation
-- [ ] Add prepare script: `"prepare": "lefthook install"`
-- [ ] Run `bun run prepare` to install hooks
-- [ ] Test pre-commit hooks with a sample commit
+- [x] Install Lefthook: `bun add -D lefthook`
+- [x] Create `lefthook.yml` configuration file
+- [x] Configure pre-commit hooks for formatting and linting
+- [x] Configure commit message validation
+- [x] Add prepare script: `"prepare": "lefthook install"`
+- [x] Run `bun run prepare` to install hooks
+- [x] Test pre-commit hooks with a sample commit
 
 ### Task 1.8: Testing Infrastructure
 **Objective**: Set up Bun test environment with happy-dom
 
 **Checklist:**
-- [ ] Install test dependencies: `bun add -D happy-dom @testing-library/jest-dom`
-- [ ] Create `src/test/setup.ts` file
-- [ ] Configure happy-dom environment in setup
-- [ ] Add global test setup for DOM simulation
-- [ ] Configure cleanup after each test
-- [ ] Add test script to package.json: `"test": "bun test src/"`
-- [ ] Create sample test file to verify setup works
-- [ ] Run tests to confirm environment is working
+- [x] Install test dependencies: `bun add -D happy-dom @testing-library/jest-dom`
+- [x] Create `src/test/setup.ts` file
+- [x] Configure happy-dom environment in setup
+- [x] Add global test setup for DOM simulation
+- [x] Configure cleanup after each test
+- [x] Add test script to package.json: `"test": "bun test src/"`
+- [x] Create sample test file to verify setup works
+- [x] Run tests to confirm environment is working
 
 ### Task 1.9: i18n Foundation (Critical)
 **Objective**: Set up internationalization infrastructure early
 
 **Checklist:**
-- [ ] Install i18n dependencies: `bun add i18next react-i18next`
-- [ ] Create `src/locales/en.json` with basic translations
-- [ ] Create `src/locales/ja.json` with basic translations
-- [ ] Create `src/i18n/config.ts` configuration file
-- [ ] Configure i18next with intelligent language detection priority:
+- [x] Install i18n dependencies: `bun add i18next react-i18next`
+- [x] Create `src/locales/en.json` with basic translations
+- [x] Create `src/locales/ja.json` with basic translations
+- [x] Create `src/i18n/config.ts` configuration file
+- [x] Configure i18next with intelligent language detection priority:
   1. localStorage saved preference ('tetris-language' key)
   2. Browser language (navigator.language, check for 'ja' prefix)
   3. Fallback to English ('en')
-- [ ] Set up localStorage persistence for language preference
-- [ ] Create basic language switching mechanism
-- [ ] Test language switching between English and Japanese
-- [ ] Test initial language detection with different browser languages
+- [x] Set up localStorage persistence for language preference
+- [x] Create basic language switching mechanism
+- [x] Test language switching between English and Japanese
+- [x] Test initial language detection with different browser languages
 
 ### Task 1.10: i18n Testing & Validation
 **Objective**: Ensure i18n system works correctly
 
 **Checklist:**
-- [ ] Create sample components using `useTranslation` hook
-- [ ] Add translations for sample text in both languages
-- [ ] Test translation loading in browser
-- [ ] Test language persistence across page reloads
-- [ ] Verify no hardcoded strings in components
-- [ ] Document translation key naming conventions
-- [ ] Add i18n testing to test setup
+- [x] Create sample components using `useTranslation` hook
+- [x] Add translations for sample text in both languages
+- [x] Test translation loading in browser
+- [x] Test language persistence across page reloads
+- [x] Verify no hardcoded strings in components
+- [x] Document translation key naming conventions
+- [x] Add i18n testing to test setup
 
 ### Task 1.11: Phase 1 Completion
 **Objective**: Validate foundation and commit progress
