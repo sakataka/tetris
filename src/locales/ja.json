@@ -23,7 +23,21 @@
     "pieces": {
       "next": "次のピース",
       "hold": "ホールド",
-      "ghost": "ゴーストピース"
+      "ghost": "ゴーストピース",
+      "preview": "ピースプレビュー"
+    },
+    "layout": {
+      "mainGame": "メインゲーム画面",
+      "gameBoard": "ゲーム盤面",
+      "gameInfo": "ゲーム情報",
+      "pieceInfo": "ピース情報",
+      "mobileHeader": "ゲーム統計ヘッダー"
+    },
+    "instructions": {
+      "pauseResume": "PキーまたはEscキーで再開",
+      "restart": "Rキーでゲーム再開",
+      "tapToResume": "タップして再開",
+      "tapToRestart": "タップして再開"
     },
     "actions": {
       "newGame": "新しいゲーム",
@@ -77,7 +91,12 @@
     "language": "言語",
     "showGhostPiece": "ゴーストピースを表示",
     "controls": "コントロール",
-    "close": "閉じる"
+    "close": "閉じる",
+    "currentLanguage": "現在の言語",
+    "ghostPiece": {
+      "enabled": "ゴーストピースプレビューが有効です",
+      "disabled": "ゴーストピースプレビューが無効です"
+    }
   },
   "languages": {
     "en": "English",

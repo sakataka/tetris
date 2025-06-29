@@ -85,6 +85,7 @@ export interface GameState {
   // Animation states
   linesClearing: number[]; // Array of line indices being cleared
   animationInProgress: boolean;
+  lineClearAnimation: LineClearAnimationState | null; // Line clear animation state
 }
 
 // Touch gesture types for mobile controls
@@ -112,6 +113,16 @@ export type GameAction =
 
 // Line clear types for scoring
 export type LineClearType = "single" | "double" | "triple" | "tetris";
+
+// Line clear animation states
+export interface LineClearAnimationState {
+  clearingLines: number[];
+  animationPhase: "flash" | "collapse" | "complete" | "idle";
+  startTime: number;
+  duration: number;
+  lineClearCount: number;
+  feedbackMessage?: string;
+}
 
 // Game difficulty settings
 export interface GameDifficulty {

@@ -23,7 +23,21 @@
     "pieces": {
       "next": "Next",
       "hold": "Hold",
-      "ghost": "Ghost Piece"
+      "ghost": "Ghost Piece",
+      "preview": "Piece Preview"
+    },
+    "layout": {
+      "mainGame": "Main Game Area",
+      "gameBoard": "Game Board",
+      "gameInfo": "Game Information",
+      "pieceInfo": "Piece Information",
+      "mobileHeader": "Game Statistics Header"
+    },
+    "instructions": {
+      "pauseResume": "Press P or Esc to resume",
+      "restart": "Press R to restart game",
+      "tapToResume": "Tap anywhere to resume",
+      "tapToRestart": "Tap anywhere to restart"
     },
     "actions": {
       "newGame": "New Game",
@@ -77,7 +91,12 @@
     "language": "Language",
     "showGhostPiece": "Show Ghost Piece",
     "controls": "Controls",
-    "close": "Close"
+    "close": "Close",
+    "currentLanguage": "Current language",
+    "ghostPiece": {
+      "enabled": "Ghost piece preview is enabled",
+      "disabled": "Ghost piece preview is disabled"
+    }
   },
   "languages": {
     "en": "English",

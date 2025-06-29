@@ -85,6 +85,7 @@ export function createInitialGameState(): GameState {
     // Animation states
     linesClearing: [],
     animationInProgress: false,
+    lineClearAnimation: null,
   };
 }
 

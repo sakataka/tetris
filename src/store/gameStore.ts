@@ -9,7 +9,14 @@ import {
   rotateTetrominoCW,
   shouldLockPiece,
 } from "@/game/game";
-import type { GameState } from "@/types/game";
+import type { GameState, LineClearAnimationState } from "@/types/game";
+import {
+  createLineClearAnimationState,
+  DEFAULT_LINE_CLEAR_CONFIG,
+  getLineClearFeedback,
+  isLineClearAnimationComplete,
+  updateLineClearAnimationState,
+} from "@/utils/lineClearAnimations";
 
 export interface GameStore extends GameState {
   // Actions
@@ -22,6 +29,9 @@ export interface GameStore extends GameState {
   togglePause: () => void;
   resetGame: () => void;
   clearAnimationData: () => void;
+  startLineClearAnimation: (clearedLines: number[]) => void;
+  updateLineClearAnimation: () => void;
+  completeLineClearAnimation: () => void;
 
   // Game loop related actions
   lockCurrentTetromino: () => boolean; // Returns true if lock was successful
@@ -101,7 +111,63 @@ export const useGameStore = create<GameStore>()(
             ...state,
             linesClearing: [],
             animationInProgress: false,
+            lineClearAnimation: null,
           })),
+
+        // Start line clear animation sequence
+        startLineClearAnimation: (clearedLines: number[]) =>
+          set((state) => {
+            if (clearedLines.length === 0) return state;
+
+            const animationState = createLineClearAnimationState(
+              clearedLines,
+              DEFAULT_LINE_CLEAR_CONFIG
+            );
+
+            return {
+              ...state,
+              linesClearing: clearedLines,
+              animationInProgress: true,
+              lineClearAnimation: {
+                ...animationState,
+                feedbackMessage: getLineClearFeedback(clearedLines.length),
+              },
+            };
+          }),
+
+        // Update line clear animation state
+        updateLineClearAnimation: () =>
+          set((state) => {
+            if (!state.lineClearAnimation) return state;
+
+            const updatedAnimation = updateLineClearAnimationState(
+              state.lineClearAnimation,
+              DEFAULT_LINE_CLEAR_CONFIG
+            );
+
+            return {
+              ...state,
+              lineClearAnimation: updatedAnimation,
+            };
+          }),
+
+        // Complete line clear animation and clean up
+        completeLineClearAnimation: () =>
+          set((state) => {
+            if (!state.lineClearAnimation) return state;
+
+            // Only complete if animation is actually finished
+            if (!isLineClearAnimationComplete(state.lineClearAnimation)) {
+              return state;
+            }
+
+            return {
+              ...state,
+              linesClearing: [],
+              animationInProgress: false,
+              lineClearAnimation: null,
+            };
+          }),
 
         // Game loop related actions
         lockCurrentTetromino: () => {

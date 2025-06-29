@@ -67,15 +67,65 @@ const AnimatedNumber: React.FC<AnimatedNumberProps> = ({
   }, [value, animate, displayValue, previousValue, duration]);
 
   const scoreChangeVariants = {
-    initial: { scale: 1, color: "inherit" },
+    initial: {
+      scale: 1,
+      color: "inherit",
+      textShadow: "0 0 0px rgba(255, 255, 255, 0)",
+      filter: "brightness(1)",
+    },
     changed: {
-      scale: [1, 1.2, 1],
-      color: ["inherit", "#10b981", "inherit"], // Green flash
+      scale: [1, 1.3, 1.1, 1],
+      color: ["inherit", "#10b981", "#fbbf24", "inherit"], // Green -> Yellow -> White
+      textShadow: [
+        "0 0 0px rgba(255, 255, 255, 0)",
+        "0 0 15px rgba(16, 185, 129, 0.8)",
+        "0 0 10px rgba(251, 191, 36, 0.6)",
+        "0 0 0px rgba(255, 255, 255, 0)",
+      ],
+      filter: ["brightness(1)", "brightness(1.5)", "brightness(1.3)", "brightness(1)"],
       transition: {
-        duration: 0.3,
+        duration: 0.5,
         ease: "easeOut",
+        times: [0, 0.3, 0.7, 1],
       },
     },
+    largeChange: {
+      scale: [1, 1.5, 0.9, 1.2, 1],
+      color: ["inherit", "#ef4444", "#f97316", "#10b981", "inherit"], // Red -> Orange -> Green -> White
+      textShadow: [
+        "0 0 0px rgba(255, 255, 255, 0)",
+        "0 0 20px rgba(239, 68, 68, 1)",
+        "0 0 18px rgba(249, 115, 22, 0.8)",
+        "0 0 15px rgba(16, 185, 129, 0.6)",
+        "0 0 0px rgba(255, 255, 255, 0)",
+      ],
+      filter: [
+        "brightness(1)",
+        "brightness(2)",
+        "brightness(1.8)",
+        "brightness(1.4)",
+        "brightness(1)",
+      ],
+      y: [0, -8, 4, -2, 0],
+      transition: {
+        duration: 0.8,
+        ease: "easeOut",
+        times: [0, 0.2, 0.4, 0.7, 1],
+      },
+    },
+  };
+
+  // Determine animation type based on score difference
+  const getAnimationType = () => {
+    if (value === previousValue) return "initial";
+
+    const difference = Math.abs(value - previousValue);
+
+    // Large change for significant score increases (1000+ points)
+    if (difference >= 1000) return "largeChange";
+
+    // Regular change for smaller increases
+    return "changed";
   };
 
   return (
@@ -84,7 +134,7 @@ const AnimatedNumber: React.FC<AnimatedNumberProps> = ({
       className={className}
       variants={scoreChangeVariants}
       initial="initial"
-      animate={value !== previousValue ? "changed" : "initial"}
+      animate={getAnimationType()}
     >
       {formatter(displayValue)}
     </motion.span>
@@ -169,13 +219,31 @@ export const ScoreBoard: React.FC<ScoreBoardProps> = ({
     normal: {
       scale: 1,
       rotate: 0,
+      boxShadow: "0 0 0px rgba(251, 191, 36, 0)",
+      filter: "brightness(1) saturate(1)",
     },
     levelUp: {
-      scale: [1, 1.3, 1],
-      rotate: [0, 5, -5, 0],
+      scale: [1, 1.5, 0.9, 1.2, 1],
+      rotate: [0, 10, -5, 3, 0],
+      boxShadow: [
+        "0 0 0px rgba(251, 191, 36, 0)",
+        "0 0 30px rgba(251, 191, 36, 1)",
+        "0 0 20px rgba(251, 191, 36, 0.7)",
+        "0 0 15px rgba(251, 191, 36, 0.5)",
+        "0 0 0px rgba(251, 191, 36, 0)",
+      ],
+      filter: [
+        "brightness(1) saturate(1)",
+        "brightness(2) saturate(1.5)",
+        "brightness(1.7) saturate(1.3)",
+        "brightness(1.4) saturate(1.1)",
+        "brightness(1) saturate(1)",
+      ],
+      y: [0, -15, 8, -4, 0],
       transition: {
         duration: LEVEL_ANIMATION_DURATION / 1000,
         ease: "easeOut",
+        times: [0, 0.2, 0.4, 0.7, 1],
       },
     },
   };
@@ -229,20 +297,82 @@ export const ScoreBoard: React.FC<ScoreBoardProps> = ({
         </motion.div>
       ))}
 
-      {/* Level up celebration animation */}
+      {/* Enhanced level up celebration animation */}
       <AnimatePresence>
         {animate && (
           <motion.div
-            key={level}
-            initial={{ opacity: 0, scale: 0.5, y: 20 }}
-            animate={{ opacity: 0 }} // Hidden by default, can be triggered by game events
-            exit={{ opacity: 0, scale: 0, y: -20 }}
-            transition={{ duration: 1, ease: "easeOut" }}
-            className="absolute inset-0 flex items-center justify-center pointer-events-none"
+            key={`level-celebration-${level}`}
+            initial={{ opacity: 0, scale: 0.3, y: 30, rotate: -10 }}
+            animate={{
+              opacity: [0, 1, 1, 0],
+              scale: [0.3, 1.2, 1, 0.8],
+              y: [30, -10, -5, -30],
+              rotate: [-10, 5, -3, 10],
+              filter: [
+                "brightness(1) blur(5px)",
+                "brightness(2) blur(0px)",
+                "brightness(1.5) blur(0px)",
+                "brightness(1) blur(2px)",
+              ],
+            }}
+            exit={{ opacity: 0, scale: 0, y: -50, rotate: 20 }}
+            transition={{
+              duration: 2,
+              ease: "easeOut",
+              times: [0, 0.3, 0.7, 1],
+            }}
+            className="absolute inset-0 flex items-center justify-center pointer-events-none z-10"
           >
-            <div className="text-yellow-400 text-2xl font-bold animate-pulse">
-              {t("game.feedback.levelUp")}
-            </div>
+            <motion.div
+              className="relative"
+              animate={{
+                textShadow: [
+                  "0 0 10px rgba(251, 191, 36, 0.8)",
+                  "0 0 20px rgba(251, 191, 36, 1)",
+                  "0 0 15px rgba(251, 191, 36, 0.9)",
+                  "0 0 5px rgba(251, 191, 36, 0.6)",
+                ],
+              }}
+              transition={{
+                duration: 2,
+                ease: "easeInOut",
+                times: [0, 0.3, 0.7, 1],
+              }}
+            >
+              <div className="text-yellow-400 text-3xl font-black tracking-wider">
+                {t("game.feedback.levelUp", "LEVEL UP!")}
+              </div>
+              {/* Sparkle effects */}
+              <motion.div
+                className="absolute -top-2 -right-2 text-yellow-300 text-xl"
+                animate={{
+                  rotate: [0, 360],
+                  scale: [0.5, 1.2, 0.5],
+                }}
+                transition={{
+                  duration: 1.5,
+                  repeat: 1,
+                  ease: "easeInOut",
+                }}
+              >
+                ✨
+              </motion.div>
+              <motion.div
+                className="absolute -bottom-1 -left-2 text-yellow-300 text-lg"
+                animate={{
+                  rotate: [0, -360],
+                  scale: [0.3, 1, 0.3],
+                }}
+                transition={{
+                  duration: 1.8,
+                  repeat: 1,
+                  ease: "easeInOut",
+                  delay: 0.2,
+                }}
+              >
+                ⭐
+              </motion.div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

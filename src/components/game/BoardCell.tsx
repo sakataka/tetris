@@ -2,16 +2,30 @@ import { motion } from "framer-motion";
 import type React from "react";
 import type { CellValue } from "@/types/game";
 import { GAME_CONSTANTS } from "@/utils/gameConstants";
+import {
+  DEFAULT_LINE_CLEAR_CONFIG,
+  getLineClearCSSProperties,
+  getLineClearVariants,
+} from "@/utils/lineClearAnimations";
 
 export interface BoardCellProps {
   value: CellValue;
   isGhost?: boolean;
   isCurrentPiece?: boolean;
   isClearing?: boolean;
+  lineClearAnimationPhase?: "flash" | "collapse" | "complete" | "idle";
+  lineClearCount?: number;
+  clearingLines?: number[];
   row: number;
   col: number;
   animationKey?: string | number; // For triggering animations on state changes
   className?: string;
+  // Enhanced animation states
+  isLocking?: boolean;
+  justPlaced?: boolean;
+  isRotating?: boolean;
+  isHardDropped?: boolean;
+  animationTrigger?: "lock" | "place" | "rotate" | "hardDrop" | "none";
 }
 
 export interface CellState {
@@ -68,58 +82,103 @@ const getCellColors = (value: CellValue, cellState: CellState) => {
   };
 };
 
-const getAnimationVariants = () => ({
-  // Initial state for new pieces
-  initial: {
-    scale: 0.8,
-    opacity: 0,
-  },
-  // Normal visible state
-  visible: {
-    scale: 1,
-    opacity: 1,
-    transition: {
-      type: "spring",
-      stiffness: 300,
-      damping: 20,
-      duration: 0.2,
+const getAnimationVariants = (lineClearCount = 0) => {
+  // Get enhanced line clear variants
+  const lineClearVariants = getLineClearVariants(lineClearCount);
+
+  return {
+    // Initial state for new pieces
+    initial: {
+      scale: 0.8,
+      opacity: 0,
     },
-  },
-  // Line clearing animation
-  clearing: {
-    scale: [1, 1.2, 0],
-    opacity: [1, 1, 0],
-    backgroundColor: ["var(--bg-color)", "#ffffff", "var(--bg-color)"],
-    transition: {
-      duration: GAME_CONSTANTS.TIMING.LINE_CLEAR_DURATION / 1000,
-      ease: "easeInOut",
-      times: [0, 0.5, 1],
+    // Normal visible state
+    visible: {
+      scale: 1,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 300,
+        damping: 20,
+        duration: 0.2,
+      },
     },
-  },
-  // Piece lock animation
-  locked: {
-    scale: [1, 1.1, 1],
-    transition: {
-      duration: GAME_CONSTANTS.TIMING.PIECE_LOCK_DELAY / 1000,
-      ease: "easeOut",
+    // Enhanced line clearing animation with phase support
+    ...lineClearVariants,
+    // Enhanced piece lock animation with multiple effects
+    locked: {
+      scale: [1, 1.15, 1.05, 1],
+      rotate: [0, 2, -1, 0],
+      boxShadow: [
+        "0 0 0px rgba(255, 255, 255, 0)",
+        "0 0 20px rgba(255, 255, 255, 0.9)",
+        "0 0 10px rgba(255, 255, 255, 0.5)",
+        "0 0 0px rgba(255, 255, 255, 0)",
+      ],
+      filter: ["brightness(1)", "brightness(1.4)", "brightness(1.2)", "brightness(1)"],
+      transition: {
+        duration: GAME_CONSTANTS.TIMING.PIECE_LOCK_DELAY / 1000,
+        ease: "easeOut",
+        times: [0, 0.3, 0.7, 1],
+      },
     },
-  },
-  // Ghost piece animation
-  ghost: {
-    opacity: GAME_CONSTANTS.GHOST_PIECE.OPACITY,
-    scale: 0.95,
-    transition: {
-      duration: 0.1,
-      ease: "easeOut",
+    // Piece placement impact effect
+    placed: {
+      scale: [1, 1.2, 0.9, 1],
+      y: [0, -4, 2, 0],
+      transition: {
+        duration: 0.4,
+        ease: "easeOut",
+        times: [0, 0.2, 0.6, 1],
+      },
     },
-  },
-});
+    // Ghost piece animation
+    ghost: {
+      opacity: GAME_CONSTANTS.GHOST_PIECE.OPACITY,
+      scale: 0.95,
+      transition: {
+        duration: 0.1,
+        ease: "easeOut",
+      },
+    },
+    // Piece hard drop landing effect
+    hardLanded: {
+      scale: [1, 1.3, 0.8, 1.1, 1],
+      y: [0, -8, 4, -2, 0],
+      boxShadow: [
+        "0 0 0px rgba(255, 255, 255, 0)",
+        "0 0 25px rgba(255, 255, 255, 1)",
+        "0 0 15px rgba(255, 255, 255, 0.7)",
+        "0 0 8px rgba(255, 255, 255, 0.3)",
+        "0 0 0px rgba(255, 255, 255, 0)",
+      ],
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+        times: [0, 0.2, 0.5, 0.8, 1],
+      },
+    },
+    // Smooth piece rotation effect
+    rotating: {
+      rotate: [0, 15, -5, 0],
+      scale: [1, 1.1, 1],
+      transition: {
+        duration: 0.25,
+        ease: "easeOut",
+        times: [0, 0.4, 1],
+      },
+    },
+  };
+};
 
 export const BoardCell: React.FC<BoardCellProps> = ({
   value,
   isGhost = false,
   isCurrentPiece = false,
   isClearing = false,
+  lineClearAnimationPhase = "idle",
+  lineClearCount = 0,
+  clearingLines = [],
   row,
   col,
   animationKey,
@@ -127,14 +186,29 @@ export const BoardCell: React.FC<BoardCellProps> = ({
 }) => {
   const cellState = getCellState(value, isGhost, isCurrentPiece, isClearing);
   const colors = getCellColors(value, cellState);
-  const variants = getAnimationVariants();
+  const variants = getAnimationVariants(lineClearCount);
 
-  // Determine animation state
+  // Get CSS properties for line clear animation
+  const lineClearCSSProps = getLineClearCSSProperties(row, clearingLines, lineClearCount);
+
+  // Determine animation state with enhanced logic
   const getAnimationState = () => {
-    if (isClearing) return "clearing";
+    // Handle line clear animation phases (highest priority)
+    if (isClearing && lineClearAnimationPhase !== "idle") {
+      return lineClearAnimationPhase;
+    }
+
+    // Handle piece animation triggers
+    if (animationTrigger === "hardDrop") return "hardLanded";
+    if (animationTrigger === "rotate") return "rotating";
+    if (animationTrigger === "place") return "placed";
+    if (animationTrigger === "lock" || isLocking) return "locked";
+
+    // Handle state-based animations
     if (isGhost) return "ghost";
     if (isCurrentPiece) return "visible";
     if (cellState.isFilled) return "locked";
+
     return "visible";
   };
 
@@ -161,6 +235,7 @@ export const BoardCell: React.FC<BoardCellProps> = ({
           backgroundColor: colors.backgroundColor,
           borderColor: colors.borderColor,
           boxShadow: colors.boxShadow,
+          ...lineClearCSSProps,
         } as React.CSSProperties
       }
       variants={variants}
