@@ -29,7 +29,19 @@
       "newGame": "新しいゲーム",
       "restart": "再スタート",
       "settings": "設定",
-      "highScores": "ハイスコア"
+      "highScores": "ハイスコア",
+      "continue": "続行",
+      "menu": "メニュー"
+    },
+    "feedback": {
+      "lineClear": {
+        "single": "シングル！",
+        "double": "ダブル！",
+        "triple": "トリプル！",
+        "tetris": "テトリス！"
+      },
+      "levelUp": "レベルアップ！",
+      "newHighScore": "新記録！"
     }
   },
   "settings": {
@@ -85,6 +97,22 @@
   "ui": {
     "editFile": "編集",
     "andSave": "して保存でHMRをテスト",
-    "clickLogos": "ViteとReactのロゴをクリックして詳細を確認"
+    "clickLogos": "ViteとReactのロゴをクリックして詳細を確認",
+    "loading": "読み込み中...",
+    "error": "エラー",
+    "confirm": "確認",
+    "cancel": "キャンセル",
+    "ok": "OK",
+    "yes": "はい",
+    "no": "いいえ"
+  },
+  "messages": {
+    "confirmRestart": "ゲームを再スタートしますか？",
+    "confirmNewGame": "新しいゲームを開始しますか？現在の進行状況は失われます。",
+    "gameStarted": "ゲーム開始！",
+    "gamePaused": "ゲーム一時停止",
+    "gameResumed": "ゲーム再開",
+    "invalidMove": "無効な操作",
+    "settingsSaved": "設定を保存しました"
   }
 }

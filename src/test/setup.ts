@@ -22,6 +22,9 @@ beforeAll(() => {
   global.Node = window.Node;
   global.localStorage = window.localStorage;
 
+  // Set up mock navigator for i18n language detection
+  global.navigator = window.navigator;
+
   // Set up additional globals for React testing
   global.requestAnimationFrame = (callback: FrameRequestCallback) => {
     return setTimeout(callback, 16);

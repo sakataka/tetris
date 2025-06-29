@@ -29,7 +29,19 @@
       "newGame": "New Game",
       "restart": "Restart",
       "settings": "Settings",
-      "highScores": "High Scores"
+      "highScores": "High Scores",
+      "continue": "Continue",
+      "menu": "Menu"
+    },
+    "feedback": {
+      "lineClear": {
+        "single": "Single!",
+        "double": "Double!",
+        "triple": "Triple!",
+        "tetris": "Tetris!"
+      },
+      "levelUp": "Level Up!",
+      "newHighScore": "New High Score!"
     }
   },
   "settings": {
@@ -85,6 +97,22 @@
   "ui": {
     "editFile": "Edit",
     "andSave": "and save to test HMR",
-    "clickLogos": "Click on the Vite and React logos to learn more"
+    "clickLogos": "Click on the Vite and React logos to learn more",
+    "loading": "Loading...",
+    "error": "Error",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "ok": "OK",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "messages": {
+    "confirmRestart": "Are you sure you want to restart the game?",
+    "confirmNewGame": "Are you sure you want to start a new game? Current progress will be lost.",
+    "gameStarted": "Game started!",
+    "gamePaused": "Game paused",
+    "gameResumed": "Game resumed",
+    "invalidMove": "Invalid move",
+    "settingsSaved": "Settings saved"
   }
 }
